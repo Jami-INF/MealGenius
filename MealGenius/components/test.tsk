@@ -1,7 +1,0 @@
-type MyProps = {
-    content:String
-
-    
-}
-
-    export...
