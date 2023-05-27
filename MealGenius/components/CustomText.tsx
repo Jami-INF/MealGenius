@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from "react-native/types";
+import { Text, StyleSheet } from "react-native";
 
 type TextType = "title" | "subtitle" | "paragraph";
 

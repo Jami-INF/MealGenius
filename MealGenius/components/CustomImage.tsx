@@ -1,4 +1,4 @@
-import { Image } from "react-native/types";
+import { Image } from "react-native";
 
 type ImageType = "icon" | "meal";
 type ImageExtension = "png" | "jpg" | "jpeg";
