@@ -1,13 +1,24 @@
-import {View, Text, StyleSheet} from "react-native";
+import {View, StyleSheet, ScrollView} from "react-native";
+import CustomText from "../components/CustomText";
+import MealInformationSheet from "../components/MealInfomationSheet";
 
 
 export default function HomeScreen() {
     return (
-      <View style={styles.container}>
-        <View style={styles.centered}>
-        </View>
-        <Text>Home</Text>
-      </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.centered}>
+                    <CustomText text="Meal Genius" textType="title"/>
+                </View>
+                <View style={styles.MealSheet}>
+                    <MealInformationSheet/>
+                </View>
+                <View style={styles.MealSheet}>
+                    <MealInformationSheet/>
+                </View>
+            </View>
+        </ScrollView>
+
     )
   };
   
@@ -19,7 +30,7 @@ export default function HomeScreen() {
     centered: {
       alignItems: "center"
     },
-    title: {
-      fontSize: 20
+    MealSheet: {
+        margin: 30
     }
   });

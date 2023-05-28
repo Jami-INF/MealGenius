@@ -7,7 +7,7 @@ type TextProps = {
     textType: TextType
 }
 
-export default function CustomText(props: TextProps) {
+export default function CustomText(props: TextProps): JSX.Element {
     return (
         <Text style={getStyle(props.textType)}>{props.text}</Text>
     )
