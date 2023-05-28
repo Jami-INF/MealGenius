@@ -3,6 +3,7 @@ import {Ionicons} from "@expo/vector-icons";
 import CustomText from "./CustomText";
 import IngredientsCapsuleList from "./IngredientsCapsuleList";
 import { IMeal } from "../models/IMeal";
+import Time from "./Time";
 
 type MealInformationSheetProps = {
     meal: IMeal
@@ -17,7 +18,7 @@ export default function MealInformationSheet(props: MealInformationSheetProps): 
                 </View>
                 <View style={styles.clock}>
                     <Ionicons name="time-outline" size={30}/>
-                    <Text style={styles.text}>{props.meal.duration}h</Text>
+                    <Time time={props.meal.duration}/>
                 </View>
             </View>
 
