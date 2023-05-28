@@ -1,7 +1,5 @@
 import {Image, ImageSourcePropType} from "react-native";
-
-type ImageType = "icon" | "meal";
-type ImageExtension = "png" | "jpg" | "jpeg";
+import { ImageExtension, ImageType } from "../models/types/ImageTypes";
 
 type ImageProps = {
     imageType: ImageType,
