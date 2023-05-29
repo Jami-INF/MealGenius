@@ -1,9 +1,9 @@
 import {View, StyleSheet} from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, FAB } from "react-native-paper";
-import MealCard from "../components/MealCard";
 import { IMeal } from "../models/IMeal";
 import { getMeals } from "../stub/stub";
+import MealCards from "../components/MealCards";
 
 const meals: IMeal[] = getMeals();
 
@@ -26,7 +26,7 @@ export default function PantryScreen() {
                 />
             </View>
             <View>
-                <MealCard meal={meals[0]}/>
+                <MealCards meals={meals}/>
             </View>
         </View>
     )

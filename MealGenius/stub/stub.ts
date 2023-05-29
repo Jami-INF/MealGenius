@@ -137,5 +137,56 @@ export function getMeals(): IMeal[] {
         ]
     };
 
-    return [paella, spaghetti];
+    let pizza: IMeal = {
+        id: "3",
+        name: "Pizza de la Mama ! Si si ma que bela !",
+        description: "A pizza.",
+        image: {
+            type: "meal",
+            name: "pizza",
+            extension: "jpg"
+        },
+        duration: 30,
+        ingredients: [
+            {
+                id: "13",
+                food: {
+                    id: "13",
+                    name: "Pâte à pizza"
+                },
+                unit: "g",
+                quantity: 200
+            },
+            {
+                id: "14",
+                food: {
+                    id: "14",
+                    name: "Sauce tomate"
+                },
+                unit: "g",
+                quantity: 100
+            },
+            {
+                id: "15",
+                food: {
+                    id: "15",
+                    name: "Oignon",
+                },
+                unit: "g",
+                quantity: 100
+            },
+            {
+                id: "16",
+                food: {
+                    id: "16",
+                    name: "Champignon",
+                },
+                unit: "g",
+                quantity: 100
+            }
+        ]
+    };
+
+
+    return [paella, spaghetti, pizza];
 };

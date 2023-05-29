@@ -1,15 +1,26 @@
 import { Text, StyleSheet } from "react-native";
 
 type TextType = "title" | "subtitle" | "paragraph" | "card";
+type ellipsizeMode = "tail" | "head" | "middle" | "clip";
 
 type TextProps = {
     text: string,
-    textType: TextType
+    textType: TextType,
+    ellipsizeMode?: ellipsizeMode,
+    numebrofLines?: number
 }
 
+/** Display a text with a specific style.
+ * @param props The text to display, the type of text (`title` | `subtitle` | `paragraph` | `card`),
+ *  the number of lines and the ellipsize mode (`tail` | `head` | `middle` | `clip`).
+ */
 export default function CustomText(props: TextProps): JSX.Element {
     return (
-        <Text style={getStyle(props.textType)}>{props.text}</Text>
+        <Text style={getStyle(props.textType)} 
+            numberOfLines={props.numebrofLines} 
+            ellipsizeMode={props.ellipsizeMode}>
+            {props.text}
+        </Text>
     )
 }
 

@@ -17,7 +17,10 @@ export default function MealCard(props: MealCardProps): JSX.Element {
             <Image style={styles.image} source={require(`../assets/meals/paella.jpeg`)}/>
             <View style={styles.header}>
                 <View style={styles.title}>
-                    <CustomText text={props.meal.name} textType="card"/>
+                    <CustomText text={props.meal.name} 
+                        textType="card"
+                        ellipsizeMode="tail"
+                        numebrofLines={1}/>
                 </View>
                 <View style={styles.clock}>
                     <Ionicons name="time-outline" size={30}/>
@@ -30,11 +33,12 @@ export default function MealCard(props: MealCardProps): JSX.Element {
 
 const styles = StyleSheet.create({
     card: {
-        width: "70%",
+        width: 300,
         borderRadius: 20,
         borderWidth: 1,
     },
     title: {
+        flex: 1,
         marginHorizontal: 10
     },
     header: {
