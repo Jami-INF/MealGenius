@@ -2,25 +2,10 @@ import {View, StyleSheet, ScrollView} from "react-native";
 import CustomText from "../components/CustomText";
 import MealInformationSheet from "../components/MealInfomationSheet";
 import { IMeal } from "../models/IMeal";
+import { getMeals } from "../stub/stub"
+import SearchBar from "../components/SearchBar";
 
-const meals: IMeal[] = [
-    {
-        id: "1",
-        name: "Paella",
-        description: "Ce plat est un plat espagnol à base de riz, de poulet, de crevettes, de moules, de petits pois, de poivrons et d'oignons.",
-        ingredients: [
-            "Riz",
-            "Poulet",
-            "Crevettes",
-            "Moules",
-            "Petits pois",
-            "Poivrons",
-            "Oignons"
-        ],
-        duration: 60,
-        image: require("../assets/meals/paella.jpeg")
-    }
-];
+const meals: IMeal[] = getMeals();
 
 export default function HomeScreen() {
     return (
@@ -28,6 +13,13 @@ export default function HomeScreen() {
             <View style={styles.container}>
                 <View style={styles.centered}>
                     <CustomText text="Meal Genius" textType="title"/>
+                    
+                </View>
+                <View style={styles.searchBar}>
+                <SearchBar placeholder="Rechercher un plat"
+                    onChangeText={function (text: string): void {
+                        console.log(text);
+                    } }/>
                 </View>
                 <View style={styles.MealSheet}>
                     <View style={styles.MealSheetTitle}>
@@ -39,7 +31,7 @@ export default function HomeScreen() {
                     <View style={styles.MealSheetTitle}>
                         <CustomText text="Désert du jour" textType="subtitle"/>
                     </View>
-                    <MealInformationSheet meal={meals[0]}/>
+                    <MealInformationSheet meal={meals[1]}/>
                 </View>
             </View>
         </ScrollView>
@@ -55,9 +47,13 @@ export default function HomeScreen() {
       alignItems: "center"
     },
     MealSheet: {
-        margin: 30
+        marginBottom: 30,
+        marginHorizontal: 30
     },
     MealSheetTitle: {
         margin: 10
+    },
+    searchBar: {
+        margin: 20
     }
   });

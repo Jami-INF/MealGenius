@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
+import { IIngredient } from "../models/IIngredient";
 
 type IngredientCapsuleProps = {
-    ingredient: string
+    ingredient: IIngredient
 }
 
 export default function IngredientCapsule(props: IngredientCapsuleProps): JSX.Element {
     return (
         <View style={styles.ingredient}>
-            <Text style={styles.ingredientText}>{props.ingredient}</Text>
+            <Text style={styles.ingredientText}>{props.ingredient.food.name}</Text>
         </View>
     )
 }
