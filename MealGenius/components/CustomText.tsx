@@ -1,6 +1,6 @@
 import { Text, StyleSheet } from "react-native";
 
-type TextType = "title" | "subtitle" | "paragraph";
+type TextType = "title" | "subtitle" | "paragraph" | "card";
 
 type TextProps = {
     text: string,
@@ -21,6 +21,8 @@ function getStyle(textType: TextType): Object {
             return styles.subtitle;
         case "paragraph":
             return styles.paragraph;
+        case "card":
+            return styles.card;
     }
 }
 
@@ -35,5 +37,8 @@ const styles = StyleSheet.create({
     },
     paragraph: {
         fontSize: 16
+    },
+    card: {
+        fontSize: 22,
     }
 });

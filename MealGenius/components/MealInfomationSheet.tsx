@@ -18,7 +18,7 @@ export default function MealInformationSheet(props: MealInformationSheetProps): 
                 </View>
                 <View style={styles.clock}>
                     <Ionicons name="time-outline" size={30}/>
-                    <Time time={props.meal.duration}/>
+                    <Time time={props.meal.duration} fontSize={20}/>
                 </View>
             </View>
 
