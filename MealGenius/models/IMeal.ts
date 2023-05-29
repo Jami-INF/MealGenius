@@ -1,4 +1,5 @@
 import { IImage } from "./IImage";
+import { IIngredient } from "./IIngredient";
 
 export interface IMeal {
     /** The id of the meal. */
@@ -12,5 +13,5 @@ export interface IMeal {
     /** The duration of the meal in minutes. */
     duration: number;
     /** The ingredients of the meal. */
-    ingredients: string[];
+    ingredients: IIngredient[];
 }
