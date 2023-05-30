@@ -1,6 +1,9 @@
+import { IFood } from "../models/IFood";
 import { IMeal } from "../models/IMeal";
 
 export function getMeals(): IMeal[] {
+    const foods: IFood[] = getFoods();
+
      let paella: IMeal = {
         id: "1",
         name: "Paella",
@@ -14,82 +17,43 @@ export function getMeals(): IMeal[] {
         ingredients: [
             {
                 id: "1",
-                food: {
-                    id: "1",
-                    name: "Riz"
-                },
+                food: foods[0],
                 unit: "g",
                 quantity: 200
             },
             {
                 id: "2",
-                food: {
-                    id: "2",
-                    name: "Poulet"
-                },
+                food: foods[1],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "3",
-                food: {
-                    id: "3",
-                    name: "Tomate"
-                },
+                food: foods[2],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "4",
-                food: {
-                    id: "4",
-                    name: "Oignon"
-                },
+                food: foods[3],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "5",
-                food: {
-                    id: "5",
-                    name: "Petits pois"
-                },
+                food: foods[4],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "6",
-                food: {
-                    id: "6",
-                    name: "Paprika"
-                },
+                food: foods[5],
                 unit: "g",
                 quantity: 10
             },
             {
                 id: "7",
-                food: {
-                    id: "7",
-                    name: "Safran"
-                },
-                unit: "g",
-                quantity: 10
-            },
-            {
-                id: "8",
-                food: {
-                    id: "8",
-                    name: "Paprika"
-                },
-                unit: "g",
-                quantity: 10
-            },
-            {
-                id: "9",
-                food: {
-                    id: "9",
-                    name: "Paprika"
-                },
+                food: foods[6],
                 unit: "g",
                 quantity: 10
             }
@@ -109,28 +73,19 @@ export function getMeals(): IMeal[] {
         ingredients: [
             {
                 id: "10",
-                food: {
-                    id: "10",
-                    name: "Pâtes"
-                },
+                food: foods[7],
                 unit: "g",
                 quantity: 200
             },
             {
                 id: "11",
-                food: {
-                    id: "11",
-                    name: "Sauce tomate"
-                },
+                food: foods[8],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "12",
-                food: {
-                    id: "12",
-                    name: "Oignon",
-                },
+                food: foods[3],
                 unit: "g",
                 quantity: 100
             }
@@ -150,37 +105,25 @@ export function getMeals(): IMeal[] {
         ingredients: [
             {
                 id: "13",
-                food: {
-                    id: "13",
-                    name: "Pâte à pizza"
-                },
+                food: foods[10],
                 unit: "g",
                 quantity: 200
             },
             {
                 id: "14",
-                food: {
-                    id: "14",
-                    name: "Sauce tomate"
-                },
+                food: foods[8],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "15",
-                food: {
-                    id: "15",
-                    name: "Oignon",
-                },
+                food: foods[3],
                 unit: "g",
                 quantity: 100
             },
             {
                 id: "16",
-                food: {
-                    id: "16",
-                    name: "Champignon",
-                },
+                food: foods[9],
                 unit: "g",
                 quantity: 100
             }
@@ -190,3 +133,55 @@ export function getMeals(): IMeal[] {
 
     return [paella, spaghetti, pizza];
 };
+
+export function getFoods(): IFood[] {
+    let foods: IFood[] = [
+        {
+            id: "1",
+            name: "Riz"
+        },
+        {
+            id: "2",
+            name: "Poulet"
+        },
+        {
+            id: "3",
+            name: "Tomate"
+        },
+        {
+            id: "4",
+            name: "Oignon"
+        },
+        {
+            id: "5",
+            name: "Petits pois"
+        },
+        {
+            id: "6",
+            name: "Paprika"
+        },
+        {
+            id: "7",
+            name: "Safran"
+        },
+        {
+            id: "8",
+            name: "Pâtes"
+        },
+        {
+            id: "9",
+            name: "Sauce tomate"
+        },
+        {
+            id: "10",
+            name: "Champignon"
+        },
+        {
+            id: "11",
+            name: "Pâte à pizza"
+        },
+    ];
+    
+    return foods;
+};
+

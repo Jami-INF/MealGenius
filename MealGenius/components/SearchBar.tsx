@@ -5,7 +5,8 @@ type SearchBarProps = {
     /** The text to display in the search bar. */
     placeholder: string,
     /** The function to call when the text changes. */
-    onChangeText: (text: string) => void
+    onChangeText: (text: string) => void,
+    style?: Object
 }
 
 /** Display a search bar.
@@ -18,14 +19,7 @@ export default function SearchBar(props: SearchBarProps): JSX.Element {
             placeholder={props.placeholder}
             value={searchQuery}
             onChangeText={props.onChangeText}
-            style={styles.searchBar}
+            style={props.style}
             />
     )
 }
-
-const styles = StyleSheet.create({
-    searchBar: {
-
-        marginHorizontal: 10
-    }
-});
