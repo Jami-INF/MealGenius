@@ -1,19 +1,19 @@
-import { Button, Divider, FAB, Modal } from "react-native-paper";
-import { View, StyleSheet, Text } from "react-native";
-import SearchBar from "./SearchBar";
-import { FlatList } from "react-native-gesture-handler";
+import { Divider, FAB, Modal } from "react-native-paper";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 import { getFoods } from "../stub/stub";
 import { IFood } from "../models/IFood";
+import React from "react";
+import SearchBar from "./SearchBar";
 
-type IngredientAddModalProps = {
+type IngredientsModalProps = {
     visible:boolean,
     onRequestClose: () => void,
     onRequestValidate: () => void
 }
 
-let ingredientsSearched: IFood[] = getFoods();
+const foods: IFood[] = getFoods();
 
-export default function IngredientAddModal(props: IngredientAddModalProps): JSX.Element {
+export default function IngredientsModal(props: IngredientsModalProps): JSX.Element {
     return (
         <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles.modal}>
             <View>
@@ -30,19 +30,18 @@ export default function IngredientAddModal(props: IngredientAddModalProps): JSX.
                     
                 </View>
                 <View>
-                    <FlatList data={ingredientsSearched} 
+                    <FlatList data={foods} 
                         renderItem={({item}) => 
                         <View>
                             <View style={styles.food}>
                                 <Text>{item.name}</Text>
-                                <FAB icon="plus" onPress={() => { } } size="small" />
+                                <FAB icon="minus" onPress={() => { } } size="small" />
                             </View>
                             <Divider />
                         </View>}
                         keyExtractor={(item) => item.id.toString()}
                         style={styles.FlatList}
                     />
-                    <Button style={styles.Validate} onPress={() => props.onRequestValidate} mode="contained">Valider</Button>
                 </View>
             </View>
         </Modal>
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     FlatList: {
-        height: "80%",
+        height: "90%",
         marginTop: 10
     },
     food: {
@@ -83,8 +82,5 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         margin: 10
-    },
-    Validate: {
-        marginTop: 10
     }
 });
