@@ -1,5 +1,6 @@
 import { IFood } from "../models/IFood";
 import { IMeal } from "../models/IMeal";
+import { IUser } from "../models/IUser";
 
 export function getMeals(): IMeal[] {
     const foods: IFood[] = getFoods();
@@ -185,3 +186,16 @@ export function getFoods(): IFood[] {
     return foods;
 };
 
+export function getUser(): IUser{
+    return {
+        id: "1",
+        firstName: "John",
+        lastName: "Doe",
+        email: "john.doe@gmail;com",
+        password: "123456",
+        favoriteMeals: getMeals(),
+        pantry: selectedFoods
+    };
+}
+
+let selectedFoods: IFood[] = [];
