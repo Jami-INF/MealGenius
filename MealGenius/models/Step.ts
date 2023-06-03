@@ -11,17 +11,6 @@ export class Step {
     /** The duration of the step. */
     private _duration: number;
 
-    //#endregion
-
-    //#region Methods
-
-    constructor(id: string, description: string, number: number, duration: number) {
-        this._id = id;
-        this._description = description;
-        this._number = number;
-        this._duration = duration;
-    }
-
     /** Return the step's id. */
     public get id(): string {
         return this._id;
@@ -40,6 +29,17 @@ export class Step {
     /** Return the step's duration. */
     public get duration(): number {
         return this._duration;
+    }
+
+    //#endregion
+
+    //#region Methods
+
+    constructor(id: string, description: string, number: number, duration: number) {
+        this._id = id;
+        this._description = description;
+        this._number = number;
+        this._duration = duration;
     }
 
     //#endregion

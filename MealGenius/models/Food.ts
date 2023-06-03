@@ -7,15 +7,6 @@ export class Food {
     /** The name of the food. */
     private _name: string;
 
-    //#endregion
-
-    //#region Methods
-
-    constructor(id: string, name: string) {
-        this._id = id;
-        this._name = name;
-    }
-
     /** Return the food's id. */
     public get id(): string {
         return this._id;
@@ -24,6 +15,15 @@ export class Food {
     /** Return the food's name. */
     public get name(): string {
         return this._name;
+    }
+
+    //#endregion
+
+    //#region Methods
+
+    constructor(id: string, name: string) {
+        this._id = id;
+        this._name = name;
     }
 
     //#endregion

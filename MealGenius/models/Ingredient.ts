@@ -13,17 +13,6 @@ export class Ingredient {
     /** The quantity of the ingredient. */
     private _quantity: number;
 
-    //#endregion
-
-    //#region Methods
-
-    constructor(id: string, food: Food, unit: string, quantity: number) {
-        this._id = id;
-        this._food = food;
-        this._unit = unit;
-        this._quantity = quantity;
-    }
-
     /** Return the ingredient's id. */
     public get id(): string {
         return this._id;
@@ -42,6 +31,17 @@ export class Ingredient {
     /** Return the ingredient's quantity. */
     public get quantity(): number {
         return this._quantity;
+    }
+
+    //#endregion
+
+    //#region Methods
+
+    constructor(id: string, food: Food, unit: string, quantity: number) {
+        this._id = id;
+        this._food = food;
+        this._unit = unit;
+        this._quantity = quantity;
     }
 
     //#endregion
