@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import IngredientCapsule from "./IngredientCapsule";
-import { IIngredient } from "../models/IIngredient";
+import { IIngredient } from "../models/Ingredient";
 
 type IngredientsCapsuleListProps = {
     ingredients: IIngredient[]

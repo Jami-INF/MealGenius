@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image  } from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import CustomText from "./CustomText";
 import IngredientsCapsuleList from "./IngredientsCapsuleList";
-import { IMeal } from "../models/IMeal";
+import { IMeal } from "../models/Meal";
 import Time from "./Time";
 
 type MealInformationSheetProps = {

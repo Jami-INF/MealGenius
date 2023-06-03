@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { IIngredient } from "../models/IIngredient";
+import { IIngredient } from "../models/Ingredient";
 
 type IngredientCapsuleProps = {
     ingredient: IIngredient

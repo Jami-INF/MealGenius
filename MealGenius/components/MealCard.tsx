@@ -1,4 +1,4 @@
-import { IMeal } from "../models/IMeal"
+import { IMeal } from "../models/Meal"
 import { View, StyleSheet, Image } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"

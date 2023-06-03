@@ -1,5 +1,5 @@
 import { View,StyleSheet, FlatList } from "react-native"
-import { IMeal } from "../models/IMeal"
+import { IMeal } from "../models/Meal"
 import MealCard from "./MealCard"
 import { ScrollView } from "react-native-gesture-handler"
 

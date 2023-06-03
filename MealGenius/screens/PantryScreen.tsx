@@ -1,12 +1,12 @@
 import { View, StyleSheet } from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, FAB } from "react-native-paper";
-import { IMeal } from "../models/IMeal";
+import { IMeal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
 import React, { useState } from 'react';
 import IngredientAddModal from "../components/IngredientAddModal";
-import { IFood } from "../models/IFood";
+import { IFood } from "../models/Food";
 import IngredientsModal from "../components/IngredientsModal";
 
 const meals: IMeal[] = getMeals();

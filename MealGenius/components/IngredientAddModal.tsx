@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import SearchBar from "./SearchBar";
 import { FlatList } from "react-native-gesture-handler";
 import { getFoods } from "../stub/stub";
-import { IFood } from "../models/IFood";
+import { IFood } from "../models/Food";
 
 type IngredientAddModalProps = {
     visible:boolean,

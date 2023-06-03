@@ -1,7 +1,7 @@
 import { Divider, FAB, Modal } from "react-native-paper";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import { getFoods } from "../stub/stub";
-import { IFood } from "../models/IFood";
+import { IFood } from "../models/Food";
 import React from "react";
 import SearchBar from "./SearchBar";
 

@@ -1,7 +1,7 @@
 import {View, StyleSheet, ScrollView} from "react-native";
 import CustomText from "../components/CustomText";
 import MealInformationSheet from "../components/MealInfomationSheet";
-import { IMeal } from "../models/IMeal";
+import { IMeal } from "../models/Meal";
 import { getMeals } from "../stub/stub"
 import SearchBar from "../components/SearchBar";
 
