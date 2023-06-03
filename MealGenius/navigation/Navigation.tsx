@@ -13,14 +13,16 @@ export default function Navigation() {
     return (
         <NavigationContainer>
             <BottomTabNavigator.Navigator 
-                initialRouteName="Home" 
-                screenOptions={{
-                    headerShown: false
-                }}>
-                    
+                initialRouteName="Home">
+
                 <BottomTabNavigator.Screen name="Home" component={HomeScreen}
                                            options={{
-                                               title: 'Home',
+                                               title: 'Meal Genius',
+                                               headerTitleStyle: {
+                                                    fontWeight: 'bold',
+                                                    fontSize: 32,
+                                               },
+                                               
                                                tabBarIcon: ({ focused, color, size }) => (
                                                    <Ionicons
                                                        name={focused ? 'ios-home' : 'ios-home-outline'}

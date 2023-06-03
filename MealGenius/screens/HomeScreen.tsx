@@ -11,10 +11,6 @@ export default function HomeScreen() {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <View style={styles.centered}>
-                    <CustomText text="Meal Genius" textType="title"/>
-                    
-                </View>
                 <View style={styles.searchBar}>
                 <SearchBar placeholder="Rechercher un plat"
                     onChangeText={function (text: string): void {
@@ -42,9 +38,6 @@ export default function HomeScreen() {
     container: {
       flex: 1,
       backgroundColor: "white",
-    },
-    centered: {
-      alignItems: "center"
     },
     MealSheet: {
         marginBottom: 30,
