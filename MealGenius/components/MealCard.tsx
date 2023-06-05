@@ -14,10 +14,10 @@ type MealCardProps = {
 export default function MealCard(props: MealCardProps): JSX.Element {
     return (
         <View style={styles.card}>
-            <Image style={styles.image} source={require(`../assets/meals/paella.jpeg`)}/>
+            <Image style={styles.image} source={{uri: props.meal.image}}/>
             <View style={styles.header}>
                 <View style={styles.title}>
-                    <CustomText text={props.meal.name} 
+                    <CustomText text={props.meal.name}
                         textType="card"
                         ellipsizeMode="tail"
                         numebrofLines={1}/>
