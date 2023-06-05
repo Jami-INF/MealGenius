@@ -1,4 +1,5 @@
 import { Ingredient } from "./Ingredient";
+import { Step } from "./Step";
 
 export class Meal {
     //#region Properties
@@ -18,7 +19,7 @@ export class Meal {
     /** The type of the meal (`aperitif`, `starter course`, `main course`, `dessert`). */
     private _type: string;
     /** The steps of the meal. */
-    private _steps: string[];
+    private _steps: Step[];
     /** The complexity of the meal (`easy`, `medium`, `hard`). */
     private _complexity: string;
 
@@ -58,7 +59,7 @@ export class Meal {
     }
 
     /** Return the meal's steps. */
-    public get steps(): string[] {
+    public get steps(): Step[] {
         return this._steps;
     }
 
@@ -71,7 +72,7 @@ export class Meal {
 
     //#region Methods
 
-    constructor(id: string, name: string, description: string, image : string, duration: number, ingredients: Ingredient[], type: string, steps: string[], complexity: string) {
+    constructor(id: string, name: string, description: string, image : string, duration: number, ingredients: Ingredient[], type: string, steps: Step[], complexity: string) {
         this._id = id;
         this._name = name;
         this._description = description;

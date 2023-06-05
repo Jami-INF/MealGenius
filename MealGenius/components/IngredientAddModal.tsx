@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import SearchBar from "./SearchBar";
 import { FlatList } from "react-native-gesture-handler";
 import { getFoods } from "../stub/stub";
-import { IFood } from "../models/Food";
+import { Food } from "../models/Food";
 
 type IngredientAddModalProps = {
     visible:boolean,
@@ -11,7 +11,7 @@ type IngredientAddModalProps = {
     onRequestValidate: () => void
 }
 
-let ingredientsSearched: IFood[] = getFoods();
+let ingredientsSearched: Food[] = getFoods();
 
 export default function IngredientAddModal(props: IngredientAddModalProps): JSX.Element {
     return (

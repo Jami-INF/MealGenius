@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import IngredientCapsule from "./IngredientCapsule";
-import { IIngredient } from "../models/Ingredient";
+import { Ingredient } from "../models/Ingredient";
 
 type IngredientsCapsuleListProps = {
-    ingredients: IIngredient[]
+    ingredients: Ingredient[]
 }
 
 export default function IngredientsCapsuleList(props: IngredientsCapsuleListProps): JSX.Element {

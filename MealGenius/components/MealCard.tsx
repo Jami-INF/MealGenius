@@ -1,11 +1,11 @@
-import { IMeal } from "../models/Meal"
+import { Meal } from "../models/Meal"
 import { View, StyleSheet, Image } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
 
 type MealCardProps = {
-    meal: IMeal
+    meal: Meal
 }
 
 /** Get a card with the meal's name, image, and duration

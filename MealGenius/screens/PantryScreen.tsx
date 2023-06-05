@@ -1,16 +1,16 @@
 import { View, StyleSheet } from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, FAB } from "react-native-paper";
-import { IMeal } from "../models/Meal";
+import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
 import React, { useState } from 'react';
 import IngredientAddModal from "../components/IngredientAddModal";
-import { IFood } from "../models/Food";
+import { Food } from "../models/Food";
 import IngredientsModal from "../components/IngredientsModal";
 
-const meals: IMeal[] = getMeals();
-const foods: IFood[] = getFoods();
+const meals: Meal[] = getMeals();
+const foods: Food[] = getFoods();
 
 export default function PantryScreen() {
     const [isModalVisible, setModalVisible] = useState(false);

@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, Image  } from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import CustomText from "./CustomText";
 import IngredientsCapsuleList from "./IngredientsCapsuleList";
-import { IMeal } from "../models/Meal";
+import { Meal } from "../models/Meal";
 import Time from "./Time";
 
 type MealInformationSheetProps = {
-    meal: IMeal
+    meal: Meal
 }
 
 export default function MealInformationSheet(props: MealInformationSheetProps): JSX.Element {

@@ -1,11 +1,11 @@
 import { View,StyleSheet, FlatList } from "react-native"
-import { IMeal } from "../models/Meal"
+import { Meal } from "../models/Meal"
 import MealCard from "./MealCard"
 import { ScrollView } from "react-native-gesture-handler"
 
 type MealCardsProps = {
     /** The meals to display. */
-    meals: IMeal[]
+    meals: Meal[]
 }
 
 /** Get a list of cards with the meals' names, images, and durations.

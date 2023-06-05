@@ -1,7 +1,7 @@
 import { Divider, FAB, Modal } from "react-native-paper";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import { getFoods } from "../stub/stub";
-import { IFood } from "../models/Food";
+import { Food } from "../models/Food";
 import React from "react";
 import SearchBar from "./SearchBar";
 
@@ -11,7 +11,7 @@ type IngredientsModalProps = {
     onRequestValidate: () => void
 }
 
-const foods: IFood[] = getFoods();
+const foods: Food[] = getFoods();
 
 export default function IngredientsModal(props: IngredientsModalProps): JSX.Element {
     return (
