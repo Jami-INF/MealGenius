@@ -23,7 +23,8 @@ export default function MealInformationSheet(props: MealInformationSheetProps): 
             </View>
 
 
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
+            <Image style={styles.image} source={{uri: props.meal.image
+            }}/>
             {/* <CustomImage imageType={props.meal.image.type} imageName={props.meal.image.name} imageExtension={props.meal.image.extension}/> */}
 
             <View style={styles.mainText}>
