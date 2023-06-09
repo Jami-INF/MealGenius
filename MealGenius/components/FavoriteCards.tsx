@@ -21,6 +21,7 @@ export default function FavoriteCards(props: MealCardsProps): JSX.Element {
                     <FavoriteCard meal={item}/>
                 </View>
             }
+            ItemSeparatorComponent={() => <View style={{height: 10}} />}
             keyExtractor={(item) => item.id.toString()}
             showsHorizontalScrollIndicator={false}/>
     )
@@ -28,6 +29,7 @@ export default function FavoriteCards(props: MealCardsProps): JSX.Element {
 
 const styles = StyleSheet.create({
     card: {
-        marginHorizontal: 10
+        marginHorizontal: 3,
+        marginVertical: 3
     }
 });

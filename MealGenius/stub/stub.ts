@@ -56,9 +56,9 @@ export function getMeals(): Meal[] {
     let pizza: Meal = new Meal(
         "3",
         "Pizza de la Mama ! Si si ma que bela !",
-        "A pizza.",
+        "C'est une pizza, un evrai pizza ! Elle est italienne ? Non américaine ! Je te jure Whallah ! C'est la pizza de la mama ! Si si ma que bela !",
         image,
-        30,
+        250,
         [
             new Ingredient("13", foods[9], "g", 200),
             new Ingredient("14", foods[10], "g", 100),

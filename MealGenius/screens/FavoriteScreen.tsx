@@ -10,22 +10,11 @@ const meals: Meal[] = getMeals();
 
 export default function FavoriteScreen() {
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.searchBar}>
-                    <SearchBar placeholder="Rechercher un plat"
-                               onChangeText={function (text: string): void {
-                                   console.log(text);
-                               } }/>
-                </View>
-                <View style={styles.MealSheet}>
-                    <View style={styles.MealSheetTitle}>
-                        <CustomText text="Plat du jour" textType="subtitle"/>
-                    </View>
-                    <FavoriteCards meals={meals}/>
-                </View>
+        <View style={styles.container}>
+            <View style={styles.FavoriteItem}>
+                <FavoriteCards meals={meals}/>
             </View>
-        </ScrollView>
+        </View>
     )
 };
 
@@ -40,9 +29,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20
     },
-    MealSheet: {
+    FavoriteItem: {
         marginBottom: 30,
-        marginHorizontal: 30
+        marginHorizontal: 10
     },
     MealSheetTitle: {
         margin: 10
