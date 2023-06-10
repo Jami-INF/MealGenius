@@ -1,7 +1,6 @@
 import { Meal } from "../models/Meal"
 import { View, StyleSheet, Image, Text } from "react-native"
 import { Surface } from 'react-native-paper';
-import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
 
@@ -43,9 +42,6 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         borderBottomLeftRadius: 20,
         borderTopLeftRadius: 20,
-    },
-    header: {
-        flexDirection: "row"
     },
     name: {
         width: "100%",
