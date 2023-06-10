@@ -3,6 +3,8 @@ import { View, StyleSheet, Image, Text } from "react-native"
 import { Surface } from 'react-native-paper';
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
+import { Swipeable } from 'react-native-gesture-handler';
+import DeleteComponent from "./DeleteComponent";
 
 type FavoriteCardProps = {
     meal: Meal
@@ -10,18 +12,27 @@ type FavoriteCardProps = {
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
-        <Surface style={styles.card}>
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
-            <View style={styles.content}>
-                <Text numberOfLines={1} style={styles.name}>{props.meal.name}</Text>
-                <Text numberOfLines={2}>{props.meal.description}</Text>
-                <View style={styles.duration}>
-                    <Ionicons name="time-outline" size={20}/>
-                    <Time time={props.meal.duration} fontSize={15}/>
-                </View>
-            </View>
-        </Surface>
+        <View style={styles.main}>
+            <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
+                <Surface style={styles.card}>
+                    <Image style={styles.image} source={{uri: props.meal.image}}/>
+                    <View style={styles.content}>
+                        <Text numberOfLines={1} style={styles.name}>{props.meal.name}</Text>
+                        <Text numberOfLines={2}>{props.meal.description}</Text>
+                        <View style={styles.duration}>
+                            <Ionicons name="time-outline" size={20}/>
+                            <Time time={props.meal.duration} fontSize={15}/>
+                        </View>
+                    </View>
+                </Surface>
+            </Swipeable>
+        </View>
+        
     )
+}
+
+function deleteMeal(meal: Meal): void {
+    console.log("Delete meal: " + meal.name);
 }
 
 const styles = StyleSheet.create({
@@ -58,6 +69,11 @@ const styles = StyleSheet.create({
     },
     durationText: {
         fontSize: 20
+    },
+    main: {
+        backgroundColor: 'red',
+        margin: 5,
+        borderRadius: 20
     }
 });
 
