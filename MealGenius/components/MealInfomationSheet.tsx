@@ -4,6 +4,7 @@ import CustomText from "./CustomText";
 import IngredientsCapsuleList from "./IngredientsCapsuleList";
 import { Meal } from "../models/Meal";
 import Time from "./Time";
+import { Surface } from 'react-native-paper';
 
 type MealInformationSheetProps = {
     meal: Meal
@@ -11,7 +12,7 @@ type MealInformationSheetProps = {
 
 export default function MealInformationSheet(props: MealInformationSheetProps): JSX.Element {
     return (
-        <View style={styles.container}>
+        <Surface style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.title}>
                     <CustomText text={props.meal.name} textType="subtitle"/>
@@ -23,7 +24,8 @@ export default function MealInformationSheet(props: MealInformationSheetProps): 
             </View>
 
 
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
+            <Image style={styles.image} source={{uri: props.meal.image
+            }}/>
             {/* <CustomImage imageType={props.meal.image.type} imageName={props.meal.image.name} imageExtension={props.meal.image.extension}/> */}
 
             <View style={styles.mainText}>
@@ -32,7 +34,7 @@ export default function MealInformationSheet(props: MealInformationSheetProps): 
                     <IngredientsCapsuleList ingredients={props.meal.ingredients}/>
                 </View>
             </View>
-        </View>
+        </Surface>
     )
 }
 
@@ -48,14 +50,12 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: "column",
-        borderWidth: 1,
         borderRadius: 20,
       },
     header: {
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        borderBottomWidth: 1,
         maxHeight: 50,
         textAlignVertical: "center"
     },

@@ -1,12 +1,16 @@
-import {View, Text, StyleSheet} from "react-native";
+import {View, StyleSheet} from "react-native";
+import {Meal} from "../models/Meal";
+import {getMeals} from "../stub/stub";
+import FavoriteCards from "../components/FavoriteCards";
 
+const meals: Meal[] = getMeals();
 
 export default function FavoriteScreen() {
     return (
         <View style={styles.container}>
-            <View style={styles.centered}>
+            <View style={styles.FavoriteItem}>
+                <FavoriteCards meals={meals}/>
             </View>
-            <Text>Favorite</Text>
         </View>
     )
 };
@@ -16,10 +20,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "white",
     },
-    centered: {
-        alignItems: "center"
-    },
-    title: {
-        fontSize: 20
+    FavoriteItem: {
+        marginBottom: 30,
+        marginHorizontal: 10
     }
 });

@@ -3,6 +3,7 @@ import { View, StyleSheet, Image } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
+import { Surface } from 'react-native-paper';
 
 type MealCardProps = {
     meal: Meal
@@ -13,7 +14,7 @@ type MealCardProps = {
  */
 export default function MealCard(props: MealCardProps): JSX.Element {
     return (
-        <View style={styles.card}>
+        <Surface style={styles.card}>
             <Image style={styles.image} source={{uri: props.meal.image}}/>
             <View style={styles.header}>
                 <View style={styles.title}>
@@ -27,7 +28,7 @@ export default function MealCard(props: MealCardProps): JSX.Element {
                     <Time time={props.meal.duration} fontSize={20}/>
                 </View>
             </View>
-        </View>
+        </Surface>
     )
 }
 
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
     card: {
         width: 300,
         borderRadius: 20,
-        borderWidth: 1,
+        marginHorizontal: 3,
+        marginVertical: 3
     },
     title: {
         flex: 1,
