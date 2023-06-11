@@ -1,7 +1,8 @@
-import { View,StyleSheet, FlatList } from "react-native"
+import { View,StyleSheet, FlatList, TouchableOpacity } from "react-native"
 import { Meal } from "../models/Meal"
 import MealCard from "./MealCard"
 import { ScrollView } from "react-native-gesture-handler"
+import { useNavigation } from "@react-navigation/native"
 
 type MealCardsProps = {
     /** The meals to display. */
@@ -12,12 +13,20 @@ type MealCardsProps = {
  * @param props The meals to display.
  */
 export default function MealCards(props: MealCardsProps): JSX.Element {
+    const navigation = useNavigation();
+    
     return (
         <FlatList
             data={props.meals}
             renderItem={({ item }) => 
             <View style={styles.card}>
-                <MealCard meal={item}/>
+                <TouchableOpacity 
+						onPress={() => {
+							// @ts-ignore
+							return navigation.navigate('PantryDetails', {meal: item});
+						}}>
+                    <MealCard meal={item}/>
+                </TouchableOpacity>
             </View>
             }
             keyExtractor={(item) => item.id.toString()}

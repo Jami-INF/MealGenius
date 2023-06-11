@@ -1,13 +1,16 @@
-import {View, StyleSheet, ScrollView} from "react-native";
+import {View, StyleSheet, ScrollView, TouchableOpacity} from "react-native";
 import CustomText from "../components/CustomText";
 import MealInformationSheet from "../components/MealInfomationSheet";
 import { Meal } from "../models/Meal";
 import { getMeals } from "../stub/stub"
 import SearchBar from "../components/SearchBar";
+import { useNavigation } from "@react-navigation/native";
 
 const meals: Meal[] = getMeals();
 
 export default function HomeScreen() {
+    const navigation = useNavigation();
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -21,13 +24,25 @@ export default function HomeScreen() {
                     <View style={styles.MealSheetTitle}>
                         <CustomText text="Plat du jour" textType="subtitle"/>
                     </View>
-                    <MealInformationSheet meal={meals[0]}/>
+                    <TouchableOpacity 
+						onPress={() => {
+							// @ts-ignore
+							return navigation.navigate('MealDetails', {meal: meals[0]});
+						}}>
+                        <MealInformationSheet meal={meals[0]}/>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.MealSheet}>
                     <View style={styles.MealSheetTitle}>
                         <CustomText text="Désert du jour" textType="subtitle"/>
                     </View>
+                    <TouchableOpacity 
+						onPress={() => {
+							// @ts-ignore
+							return navigation.navigate('MealDetails', {meal: meals[1]});
+						}}>
                     <MealInformationSheet meal={meals[1]}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         </ScrollView>
