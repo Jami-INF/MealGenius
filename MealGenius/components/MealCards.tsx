@@ -1,7 +1,6 @@
 import { View,StyleSheet, FlatList, TouchableOpacity } from "react-native"
 import { Meal } from "../models/Meal"
 import MealCard from "./MealCard"
-import { ScrollView } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 
 type MealCardsProps = {
@@ -23,7 +22,7 @@ export default function MealCards(props: MealCardsProps): JSX.Element {
                 <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
-							return navigation.navigate('PantryDetails', {meal: item});
+							return navigation.navigate('PantryDetails', {meal: item, navigation: navigation});
 						}}>
                     <MealCard meal={item}/>
                 </TouchableOpacity>
