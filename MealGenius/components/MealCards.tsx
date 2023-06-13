@@ -22,7 +22,7 @@ export default function MealCards(props: MealCardsProps): JSX.Element {
                 <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
-							return navigation.navigate('PantryDetails', {meal: item, navigation: navigation});
+							return navigation.navigate('PantryDetails', {meal: item});
 						}}>
                     <MealCard meal={item}/>
                 </TouchableOpacity>

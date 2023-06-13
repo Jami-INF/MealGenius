@@ -1,21 +1,19 @@
-import { Ionicons } from "@expo/vector-icons"
-import { View, StyleSheet } from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { IconButton } from "react-native-paper"
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet } from "react-native"
+import { IconButton, Portal } from "react-native-paper"
 
-type BackButtonProps = {
-    /** The function to call when the back button is pressed. */
-    onPress: () => void
-}
+export default function BackButton(): JSX.Element {
+    const navigation = useNavigation();
 
-export default function BackButton(props: BackButtonProps): JSX.Element {
     return (
-        <IconButton icon={"arrow-left"}
+        <Portal> 
+            <IconButton icon={"arrow-left"}
                     size={30} 
                     iconColor="black"
                     containerColor="white"
-                    onPress={props.onPress}
+                    onPress={() => navigation.goBack()}
                     style={styles.backButton}/>
+        </Portal>
     )
 }
 
@@ -24,7 +22,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 0,
         left: 0,
-        zIndex: -1,
         margin: 10
     }
 })

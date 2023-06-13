@@ -1,12 +1,15 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 import Navigation from "./navigation/Navigation";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export default function App() {
   return (
     <>
     <SafeAreaView style={styles.topSafeArea}/>
       <SafeAreaView style={styles.mainSafeArea}>
-        <Navigation/>
+        <PaperProvider>
+          <Navigation/>
+        </PaperProvider>
       </SafeAreaView>
     </>
   );

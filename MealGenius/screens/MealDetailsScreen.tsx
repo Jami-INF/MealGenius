@@ -2,24 +2,21 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { Meal } from "../models/Meal";
 import { ScrollView } from "react-native-gesture-handler";
 import BackButton from "../components/BackButton";
-import { NavigationProp } from "@react-navigation/native";
 
 type MealDetailsScreenProps = {
     route: {
         params: {
             meal: Meal
         }
-    },
-    /** The navigation prop. */
-    navigation: NavigationProp<ReactNavigation.RootParamList>
+    }
 }
 
 // @ts-ignore
-export default function MealDetailsScreen(props: MealDetailsScreenProps) {
+export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.Element  {
 
     return (
         <View style={styles.container}>
-            <BackButton onPress={() => props.navigation.goBack()}/>
+            <BackButton/>
             <Image style={styles.image} source={{uri: props.route.params.meal.image}}/>
             <ScrollView style={styles.scrollview}
                         bounces={false}>
