@@ -1,14 +1,16 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 import Navigation from "./navigation/Navigation";
+import store from './redux/store';
+import { Provider} from 'react-redux'
 
 export default function App() {
   return (
-    <>
-    <SafeAreaView style={styles.topSafeArea}/>
-      <SafeAreaView style={styles.mainSafeArea}>
-        <Navigation/>
-      </SafeAreaView>
-    </>
+    <Provider store={store}>
+      <SafeAreaView style={styles.topSafeArea}/>
+        <SafeAreaView style={styles.mainSafeArea}>
+          <Navigation/>
+        </SafeAreaView>
+    </Provider>
   );
 }
 
