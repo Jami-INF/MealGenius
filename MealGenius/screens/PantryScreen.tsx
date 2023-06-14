@@ -43,9 +43,6 @@ export default function PantryScreen() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.centered}>
-                <CustomText text="Garde-manger" textType="title"/>
-            </View>
             <View style={styles.buttonContainer}>
                 
                 <Button icon="fridge" 

@@ -9,7 +9,11 @@ export default function PantryNavigation() {
         <Stack.Navigator initialRouteName="PantryList">
             <Stack.Screen name="PantryList" component={PantryScreen} 
                 options={{
-                    headerShown: false
+                    title: "Garde-manger",
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        fontSize: 32,
+                   },
                 }}/>
             <Stack.Screen 
                 name="PantryDetails"

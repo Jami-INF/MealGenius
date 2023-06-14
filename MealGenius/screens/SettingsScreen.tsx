@@ -11,8 +11,6 @@ export default function SettingsScreen(): JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.centered}>
-                <CustomText text={"Paramètres"} textType={"title"} />
-
                 <View style={styles.accountSubtitle}>
                     <CustomText text={"Compte"} textType={"subtitle"} />
                 </View>
@@ -69,9 +67,6 @@ const styles = StyleSheet.create({
     },
     centered: {
         alignItems: "center" 
-    },
-    title: {
-        fontSize: 20
     },
     switch: {
         flexDirection: "row",

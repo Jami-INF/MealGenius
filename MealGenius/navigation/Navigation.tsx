@@ -26,39 +26,49 @@ export default function Navigation() {
                                                             color={color}
                                                         />
                                                     ),
+                                                    title: "Menu",
                                             }}/>
                     <BottomTabNavigator.Screen name="Pantry" component={PantryNavigation}
                                             options={{
                                                 headerShown: false,
-                                                    tabBarIcon: ({ focused, color, size }) => (
-                                                        <Ionicons
-                                                            name={focused ? 'ios-restaurant' : 'ios-restaurant-outline'}
-                                                            size={size}
-                                                            color={color}
-                                                        />
-                                                    ),
+                                                tabBarIcon: ({ focused, color, size }) => (
+                                                    <Ionicons
+                                                        name={focused ? 'ios-restaurant' : 'ios-restaurant-outline'}
+                                                        size={size}
+                                                        color={color}
+                                                    />
+                                                ),
+                                                title: "Garde-manger"
                                             }}/>
                     <BottomTabNavigator.Screen name="Favorite" component={FavoriteScreen}
                                             options={{
-                                                title: 'Favorite',
-                                                    tabBarIcon: ({ focused, color, size }) => (
-                                                        <Ionicons
-                                                            name={focused ? 'ios-heart' : 'ios-heart-outline'}
-                                                            size={size}
-                                                            color={color}
-                                                        />
-                                                    ),
+                                                title: 'Favoris',
+                                                tabBarIcon: ({ focused, color, size }) => (
+                                                    <Ionicons
+                                                        name={focused ? 'ios-heart' : 'ios-heart-outline'}
+                                                        size={size}
+                                                        color={color}
+                                                    />
+                                                ),
+                                                headerTitleStyle: {
+                                                    fontWeight: 'bold',
+                                                    fontSize: 32,
+                                                },
                                             }}/>
                     <BottomTabNavigator.Screen name="Settings" component={SettingsScreen}
                                             options={{
-                                                title: 'Settings',
-                                                    tabBarIcon: ({ focused, color, size }) => (
-                                                        <Ionicons
-                                                            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-                                                            size={size}
-                                                            color={color}
-                                                        />
-                                                    ),
+                                                title: 'Paramètres',
+                                                tabBarIcon: ({ focused, color, size }) => (
+                                                    <Ionicons
+                                                        name={focused ? 'ios-settings' : 'ios-settings-outline'}
+                                                        size={size}
+                                                        color={color}
+                                                    />
+                                                ),
+                                                headerTitleStyle: {
+                                                    fontWeight: 'bold',
+                                                    fontSize: 32,
+                                                },
                                             }}/>
                 </BottomTabNavigator.Navigator>
             </NavigationContainer>
