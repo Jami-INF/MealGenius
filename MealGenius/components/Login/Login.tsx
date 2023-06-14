@@ -18,7 +18,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <Image source={require('../../assets/logo.png')} style={styles.logo} />
+            <Image source={require('../../assets/icon.png')} style={styles.logo} />
 
             <TextInput
                 label="Email"
