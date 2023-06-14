@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
 interface LoginProps {
     onLoginSuccess: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
+export default function Login({ onLoginSuccess }: LoginProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
-        // Effectuer ici la logique de connexion
-        // Vérification des informations de connexion, appel à une API, etc.
-
-        // Une fois la connexion réussie
+        // Appel API pour vérifier les informations de connexion
+        // Lancer onLoginSuccess() si la connexion est réussie
         onLoginSuccess();
     };
 
     return (
-        <View>
+        <View style={{ alignItems: 'center' }}>
+            <Image source={require('../../assets/logo.png')} style={styles.logo} />
+
             <TextInput
                 label="Email"
                 value={email}
                 onChangeText={text => setEmail(text)}
                 mode="outlined"
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 16, width: 300 }}
             />
 
             <TextInput
@@ -34,14 +34,20 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 onChangeText={text => setPassword(text)}
                 secureTextEntry
                 mode="outlined"
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 16, width: 300 }}
             />
 
-            <Button mode="contained" onPress={handleLogin}>
+            <Button mode="contained" onPress={handleLogin} style={{ width: 200 }}>
                 Login
             </Button>
         </View>
     );
-};
 
-export default Login;
+};
+const styles = StyleSheet.create({
+    logo: {
+        width: 200,
+        height: 220,
+        marginBottom: 100,
+    },
+});
