@@ -29,7 +29,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
             />
 
             <TextInput
-                label="Password"
+                label="Mot de passe"
                 value={password}
                 onChangeText={text => setPassword(text)}
                 secureTextEntry
@@ -38,7 +38,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
             />
 
             <Button mode="contained" onPress={handleLogin} style={{ width: 200 }}>
-                Login
+                Connexion
             </Button>
         </View>
     );
