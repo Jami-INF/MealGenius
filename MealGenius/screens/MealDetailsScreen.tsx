@@ -34,6 +34,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
             </Portal>
             
             <Image style={styles.image} source={{uri: props.route.params.meal.image}}/>
+
             <ScrollView style={styles.scrollview}
                         bounces={false}>
               
@@ -63,7 +64,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                                                 </View>
                                             </View>
                                             
-                                            <Text style={styles.step} >{item.description}</Text>
+                                            <Text style={styles.step}>{item.description}</Text>
                                         </View>
                                     </Surface>}
                                 style={styles.steps}
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     },
     title: {
         alignItems: "center",
-        marginTop: 20
+        marginVertical: 20
     },
     mainText: {
         marginHorizontal: 30,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     },
     step: {
         marginVertical: 10,
-        marginLeft: 10,
+        marginHorizontal: 10
     },
     titleStep: {
         marginVertical: 10,
@@ -153,14 +154,15 @@ const styles = StyleSheet.create({
     clock: {
         flexDirection: "row",
         alignItems: "center",
-        marginLeft: 10
+        marginHorizontal: 10
     },
     cardHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         alignContent: "center",
-        width: "83%"
+        maxWidth: "100%",
+        minWidth: "100%"
     },
     favorite: {
         margin: 10,
