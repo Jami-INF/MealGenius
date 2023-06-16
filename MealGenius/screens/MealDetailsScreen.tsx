@@ -44,26 +44,31 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                     <View style={styles.mainText}>
                         <CustomText text={"Ingrédients"} textType="subtitle"/>
                         <FlatList data={props.route.params.meal.ingredients}
-                                    renderItem={({item}) => <Text style={styles.ingredient} >{getIngredientText(item)}</Text>}
-                                    style={styles.ingredients}/>
+                                renderItem={({item}) => <Text style={styles.ingredient} >{getIngredientText(item)}</Text>}
+                                style={styles.ingredients}
+                                scrollEnabled={false}/>
+                        
                         <Divider style={styles.divider}/>
                         <CustomText text={"Préparation"} textType="subtitle"/>
+                        
                         <FlatList data={props.route.params.meal.steps}
-                                    renderItem={({item, index}) => 
-                                        <Surface style={styles.card}>
-                                           <View>
-                                                <View style={styles.cardHeader}>
-                                                    <Text variant="titleLarge" style={styles.titlesStep}>{`Etape ${index + 1}`}</Text>
-                                                    <View style={styles.clock}>
-                                                        <Ionicons name="time-outline" size={20}/>
-                                                        <Time time={item.duration} fontSize={17}/>
-                                                    </View>
+                                renderItem={({item, index}) => 
+                                    <Surface style={styles.card}>
+                                        <View>
+                                            <View style={styles.cardHeader}>
+                                                <Text variant="titleLarge" style={styles.titlesStep}>{`Etape ${index + 1}`}</Text>
+                                                <View style={styles.clock}>
+                                                    <Ionicons name="time-outline" size={20}/>
+                                                    <Time time={item.duration} fontSize={17}/>
                                                 </View>
-                                                
-                                                <Text style={styles.step} >{item.description}</Text>
-                                           </View>
-                                        </Surface>}
-                                    style={styles.steps}/>
+                                            </View>
+                                            
+                                            <Text style={styles.step} >{item.description}</Text>
+                                        </View>
+                                    </Surface>}
+                                style={styles.steps}
+                                scrollEnabled={false}/>
+                        
                     </View>
                 </View>
             </ScrollView>
@@ -137,6 +142,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         flexDirection: "row",
         minHeight: 50,
+        minWidth: "100%",
         height: "auto",
         marginHorizontal: 3,
         marginVertical: 10
