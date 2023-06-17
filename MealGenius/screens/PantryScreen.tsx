@@ -1,5 +1,4 @@
 import { View, StyleSheet } from "react-native";
-import CustomText from "../components/CustomText";
 import { Button, FAB } from "react-native-paper";
 import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
@@ -12,7 +11,10 @@ import IngredientsModal from "../components/IngredientsModal";
 const meals: Meal[] = getMeals();
 const foods: Food[] = getFoods();
 
-export default function PantryScreen() {
+interface PantryScreenProps {
+    theme: Record<string, string>,
+}
+export default function PantryScreen(props: PantryScreenProps): JSX.Element {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isIngredientsModalVisible, setIngredientsModalVisible] = useState(false);
 
@@ -42,8 +44,8 @@ export default function PantryScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.buttonContainer}>
+        <View style={styles(props.theme).container}>
+            <View style={styles(props.theme).buttonContainer}>
                 
                 <Button icon="fridge" 
                     mode="contained-tonal" 
@@ -56,7 +58,7 @@ export default function PantryScreen() {
                 />
             </View>
             <View>
-                <MealCards meals={meals}/>
+                <MealCards meals={meals} theme={props.theme}/>
             </View>
             <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal}/>
             <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal}/>
@@ -64,10 +66,10 @@ export default function PantryScreen() {
     )
 };
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.backgroundColor,
     },
     centered: {
         alignItems: "center"

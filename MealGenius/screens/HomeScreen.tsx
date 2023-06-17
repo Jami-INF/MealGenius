@@ -8,40 +8,43 @@ import { useNavigation } from "@react-navigation/native";
 
 const meals: Meal[] = getMeals();
 
-export default function HomeScreen() {
+interface HomeScreenProps {
+    theme: Record<string, string>,
+}
+export default function HomeScreen(props: HomeScreenProps): JSX.Element {
     const navigation = useNavigation();
 
     return (
         <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.searchBar}>
+            <View style={styles(props.theme).container}>
+                <View style={styles(props.theme).searchBar}>
                 <SearchBar placeholder="Rechercher un plat"
                     onChangeText={function (text: string): void {
                         console.log(text);
                     } }/>
                 </View>
-                <View style={styles.MealSheet}>
-                    <View style={styles.MealSheetTitle}>
-                        <CustomText text="Plat du jour" textType="subtitle"/>
+                <View style={styles(props.theme).MealSheet}>
+                    <View style={styles(props.theme).MealSheetTitle}>
+                        <CustomText text="Plat du jour" textType="subtitle" theme={props.theme}/>
                     </View>
                     <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
 							return navigation.navigate('MealDetails', {meal: meals[0]});
 						}}>
-                        <MealInformationSheet meal={meals[0]}/>
+                        <MealInformationSheet meal={meals[0]} theme={props.theme}/>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.MealSheet}>
-                    <View style={styles.MealSheetTitle}>
-                        <CustomText text="Désert du jour" textType="subtitle"/>
+                <View style={styles(props.theme).MealSheet}>
+                    <View style={styles(props.theme).MealSheetTitle}>
+                        <CustomText text="Désert du jour" textType="subtitle" theme={props.theme}/>
                     </View>
                     <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
 							return navigation.navigate('MealDetails', {meal: meals[1]});
 						}}>
-                    <MealInformationSheet meal={meals[1]}/>
+                    <MealInformationSheet meal={meals[1]} theme={props.theme}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -49,10 +52,10 @@ export default function HomeScreen() {
     )
   };
   
-  const styles = StyleSheet.create({
+  const styles = (theme) => StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
+      backgroundColor: theme.backgroundColor,
     },
     MealSheet: {
         marginBottom: 30,

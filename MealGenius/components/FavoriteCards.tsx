@@ -4,7 +4,8 @@ import FavoriteCard from "./FavoriteCard";
 
 type FavoriteCards = {
     /** The meals to display. */
-    meals: Meal[]
+    meals: Meal[],
+    theme: Record<string, string>
 }
 
 export default function FavoriteCards(props: FavoriteCards): JSX.Element {
@@ -14,7 +15,7 @@ export default function FavoriteCards(props: FavoriteCards): JSX.Element {
             data={props.meals}
             renderItem={({ item }) =>
                 <View style={styles.card}>
-                    <FavoriteCard meal={item}/>
+                    <FavoriteCard meal={item} theme={props.theme}/>
                 </View>
             }
             ItemSeparatorComponent={() => <View style={{height: 10}} />}

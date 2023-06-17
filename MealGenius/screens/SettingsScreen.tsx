@@ -4,55 +4,62 @@ import { Button, Switch, TextInput } from "react-native-paper";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function SettingsScreen(): JSX.Element {
-    const [isSwitchOn, setIsSwitchOn] = useState(false);
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+interface SettingsScreenProps {
+    theme: Record<string, string>,
+    isDarkTheme: boolean,
+    setDarkTheme: Function,
+}
+export default function SettingsScreen(props: SettingsScreenProps): JSX.Element {
+    const onToggleSwitch = (): void => { 
+        props.setDarkTheme(!props.isDarkTheme);
+    }
+    const { theme } = props;
 
     return (
-        <View style={styles.container}>
-            <View style={styles.centered}>
-                <View style={styles.accountSubtitle}>
-                    <CustomText text={"Compte"} textType={"subtitle"} />
+        <View style={styles(theme).container}>
+            <View style={styles(theme).centered}>
+                <View style={styles(theme).accountSubtitle}>
+                    <CustomText text={"Compte"} textType={"subtitle"} theme={theme} />
                 </View>
-                <View style={styles.setingUpdate}>
+                <View style={styles(theme).settingUpdate}>
                     <TextInput label={"Prénom"} 
                         value={""}
                         mode={"outlined"}
                         onChangeText={text => {}}
-                        style={styles.textInput}/>
+                        style={styles(theme).textInput}/>
 
                     <TextInput label={"Nom"}
                         value={""}
                         mode={"outlined"}
                         onChangeText={text => {}}
-                        style={styles.textInput}/>
+                        style={styles(theme).textInput}/>
 
                     <TextInput label={"Courriel"}
                         value={""}
                         mode={"outlined"}
                         onChangeText={text => {}}
-                        style={styles.textInput}/>
+                        style={styles(theme).textInput}/>
 
                     <TextInput label={"Mot de passe"}
                         value={""}
                         mode={"outlined"}
                         onChangeText={text => {}}
-                        style={styles.textInput}/>
+                        style={styles(theme).textInput}/>
 
                     <TextInput label={"Confirmation du mot de passe"}
                         value={""}
                         mode={"outlined"}
                         onChangeText={text => {}}
-                        style={styles.textInput}/>
+                        style={styles(theme).textInput}/>
 
-                    <Button children={"Valider"} mode="contained-tonal" onPress={() => {}} style={styles.validateButton}/>
+                    <Button children={"Valider"} mode="contained-tonal" onPress={() => {}} style={styles(theme).validateButton}/>
                 </View>
-                <View style={styles.theme}>
-                    <CustomText text={"Thème"} textType={"subtitle"} />
-                    <View style={styles.switch}>
-                    <Ionicons name="sunny-outline" size={30}/>
-                    <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-                    <Ionicons name="moon-outline" size={30}/>
+                <View style={styles(theme).theme}>
+                    <CustomText text={"Thème"} textType={"subtitle"} theme={theme}/>
+                    <View style={styles(theme).switch}>
+                    <Ionicons name="sunny-outline" size={30} style={{color: theme.secondaryTextColor}}/>
+                    <Switch value={props.isDarkTheme} onValueChange={onToggleSwitch} />
+                    <Ionicons name="moon-outline" size={30} style={{color: theme.secondaryTextColor}}/>
                 </View>
                 </View>
             </View>
@@ -60,10 +67,10 @@ export default function SettingsScreen(): JSX.Element {
     )
 };
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.backgroundColor,
     },
     centered: {
         alignItems: "center" 
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         paddingHorizontal: 20
     },
-    setingUpdate: {
+    settingUpdate: {
         flexDirection: "column",
         alignItems: "center",
         width: "100%"
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         width: "100%",
         paddingHorizontal: 20,
-        marginTop: 20
+        marginTop: 20,
     },
     validateButton: {
         marginTop: 20,
