@@ -1,23 +1,60 @@
-import { StyleSheet, SafeAreaView } from 'react-native';
-import Navigation from "./navigation/Navigation";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
+import Navigation from './navigation/Navigation';
+import { Provider } from 'react-redux';
 import store from './redux/store';
-import { Provider} from 'react-redux'
 import { Provider as PaperProvider } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Login from "./components/Login/Login";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  const checkLoginStatus = async () => {
+    try {
+      const value = await AsyncStorage.getItem('isLoggedIn');
+      if (value !== null && value === 'true') {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.log('Erreur lors de la connexion', error);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    AsyncStorage.setItem('isLoggedIn', 'true');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    AsyncStorage.setItem('isLoggedIn', 'false');
+  };
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.topSafeArea}/>
+      <Provider store={store}>
+        <SafeAreaView style={styles.topSafeArea} />
         <SafeAreaView style={styles.mainSafeArea}>
-        <PaperProvider>
-          <Navigation/>
-        </PaperProvider>
+          {isLoggedIn ? (
+              <PaperProvider>
+              <Navigation onLogout={handleLogout} />
+            </PaperProvider>
+          ) : (
+              <View style={styles.container}>
+                <Login onLoginSuccess={handleLoginSuccess} />
+              </View>
+          )}
         </SafeAreaView>
-    </Provider>
+      </Provider>
   );
 }
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -26,10 +63,10 @@ const styles = StyleSheet.create({
   },
   mainSafeArea: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   topSafeArea: {
     flex: 0,
-    backgroundColor: 'white'
-  }
+    backgroundColor: 'white',
+  },
 });
