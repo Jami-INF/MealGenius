@@ -8,14 +8,15 @@ import DeleteComponent from "./DeleteComponent";
 
 type FavoriteCardProps = {
     meal: Meal,
-    theme: Record<string, string>
+    theme: Record<string, string>,
+    onDelete: (meal: Meal) => void
 }
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
         <View style={styles(props.theme).wrapper}>
             <View style={styles(props.theme).main}>
-                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
+                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={props.onDelete}/>}>
                     <Surface style={styles(props.theme).card} mode={"flat"}>
                         <Image style={styles(props.theme).image} source={{uri: props.meal.image}}/>
                         <View style={styles(props.theme).content}>
@@ -33,11 +34,7 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     )
 }
 
-function deleteMeal(meal: Meal): void {
-    console.log("Delete meal: " + meal.name);
-}
-
-const styles = (theme) => StyleSheet.create({
+const styles = StyleSheet.create({
     card: {
         width: "auto",
         borderRadius: 20,

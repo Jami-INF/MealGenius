@@ -1,22 +1,33 @@
 import {View, StyleSheet} from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, Switch, TextInput } from "react-native-paper";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useNavigation} from "@react-navigation/native";
 
 interface SettingsScreenProps {
     theme: Record<string, string>,
     isDarkTheme: boolean,
     setDarkTheme: Function,
 }
+type SettingsScreenProps = {
+    handleLogout: () => void;
+};
 export default function SettingsScreen(props: SettingsScreenProps): JSX.Element {
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
+    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    const navigation = useNavigation();
     const onToggleSwitch = async () => { 
         const isDarkTheme = !props.isDarkTheme;
         props.setDarkTheme(isDarkTheme);
         await AsyncStorage.setItem('isDarkTheme', isDarkTheme ? 'true' : 'false');
     }
     const { theme } = props;
+
+    const handleLogout = () => {
+        props.handleLogout();
+    };
 
     return (
         <View style={styles(theme).container}>
@@ -65,7 +76,11 @@ export default function SettingsScreen(props: SettingsScreenProps): JSX.Element 
                     <Ionicons name="moon-outline" size={30} style={{color: theme.secondaryTextColor}}/>
                 </View>
                 </View>
+
             </View>
+            <Button mode="outlined" onPress={handleLogout} style={styles.logoutButton}>
+                Déconnexion
+            </Button>
         </View>
     )
 };
@@ -76,7 +91,7 @@ const styles = (theme) => StyleSheet.create({
         backgroundColor: theme.backgroundColor,
     },
     centered: {
-        alignItems: "center" 
+        alignItems: "center"
     },
     switch: {
         flexDirection: "row",
@@ -110,5 +125,11 @@ const styles = (theme) => StyleSheet.create({
     validateButton: {
         marginTop: 20,
         width: "90%"
+    },
+    logoutButton: {
+        position: "absolute",
+        bottom: 16, // Espacement en bas
+        left: 40, // Espacement à gauche
+        right: 40, // Espacement à droite
     }
 });
