@@ -17,7 +17,6 @@ type MealDetailsScreenProps = {
     }
 }
 
-// @ts-ignore
 export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.Element  {
 
     return (
@@ -29,7 +28,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                             size={30}
                             iconColor="black"
                             mode="contained-tonal"
-                            style={styles.favorite}
+                            style={styles.favoriteButton}
                             animated={true}/>
             </Portal>
             
@@ -42,7 +41,8 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                     <View style={styles.title}>
                         <CustomText text={props.route.params.meal.name} textType="title"/>
                     </View>
-                    <View style={styles.mainText}>
+
+                    <View style={styles.mealInformation}>
                         <CustomText text={"Ingrédients"} textType="subtitle"/>
                         <FlatList data={props.route.params.meal.ingredients}
                                 renderItem={({item}) => <Text style={styles.ingredient} >{getIngredientText(item)}</Text>}
@@ -50,9 +50,12 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                                 scrollEnabled={false}/>
                         
                         <Divider style={styles.divider}/>
+
                         <CustomText text={"Préparation"} textType="subtitle"/>
                         
-                        <FlatList data={props.route.params.meal.steps}
+                        {/* <FlatList data={props.route.params.meal.steps}
+                                style={styles.steps}
+                                scrollEnabled={false}
                                 renderItem={({item, index}) => 
                                     <Surface style={styles.card}>
                                         <View>
@@ -66,9 +69,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                                             
                                             <Text style={styles.step}>{item.description}</Text>
                                         </View>
-                                    </Surface>}
-                                style={styles.steps}
-                                scrollEnabled={false}/>
+                                    </Surface>}/> */}
                         
                     </View>
                 </View>
@@ -98,18 +99,17 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: 'white',
         marginTop: 230,
-        height: 1000
+        minHeight: 700
     },
     scrollview : {
         backgroundColor: "transparent",
-        height: 100,
         width: '100%'
     },
     title: {
         alignItems: "center",
         marginVertical: 20
     },
-    mainText: {
+    mealInformation: {
         marginHorizontal: 30,
     },
     ingredient: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         maxWidth: "100%",
         minWidth: "100%"
     },
-    favorite: {
+    favoriteButton: {
         margin: 10,
         position: "absolute",
         top: 0,
