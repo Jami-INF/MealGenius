@@ -1,25 +1,30 @@
-import {NavigationContainer} from "@react-navigation/native";
+import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import SettingsScreen from "../screens/SettingsScreen";
-import PantryScreen from "../screens/PantryScreen";
-import FavoriteScreen from "../screens/FavoriteScreen";
 import { Ionicons } from '@expo/vector-icons';
 import MealNavigation from "./MealNavigation";
 import PantryNavigation from "./PantryNavigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Login from "../components/Login/Login";
+import React from "react";
+import FavoriteScreen from "../screens/FavoriteScreen";
 
-export default function Navigation(props): JSX.Element {
+type NavigationProps = {
+    theme: Record<string, string>,
+    isDarkMode: boolean,
+    setIsDarkMode: Function,
+    onLogout: () => void,
+}
+
+export default function Navigation(props: NavigationProps) {
     const BottomTabNavigator = createBottomTabNavigator();
-    const SettingsComponent = () => <SettingsScreen handleLogout={props.onLogout} />;
 
     return (
         <SafeAreaProvider>
-            <NavigationContainer>
+            <NavigationContainer theme={props.isDarkMode ? DarkTheme : DefaultTheme}>
                 <BottomTabNavigator.Navigator 
                     initialRouteName="Home">
 
-                    <BottomTabNavigator.Screen name="Home" component={MealNavigation}
+                    <BottomTabNavigator.Screen name="Home" component={() => <MealNavigation theme={props.theme}/>}
                         options={{
                                 headerShown: false,
                                 tabBarIcon: ({ focused, color, size }) => (
@@ -31,7 +36,7 @@ export default function Navigation(props): JSX.Element {
                                 ),
                                 title: "Menu",
                         }}/>
-                    <BottomTabNavigator.Screen name="Pantry" component={PantryNavigation}
+                    <BottomTabNavigator.Screen name="Pantry" component={() => <PantryNavigation theme={props.theme}/>}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({ focused, color, size }) => (
@@ -43,7 +48,7 @@ export default function Navigation(props): JSX.Element {
                             ),
                             title: "Garde-manger"
                         }}/>
-                    <BottomTabNavigator.Screen name="Favorite" component={FavoriteScreen}
+                    <BottomTabNavigator.Screen name="Favorite" component={() => <FavoriteScreen theme={props.theme}/>}
                         options={{
                             title: 'Favoris',
                             tabBarIcon: ({ focused, color, size }) => (
@@ -58,7 +63,7 @@ export default function Navigation(props): JSX.Element {
                                 fontSize: 32,
                             },
                         }}/>
-                    <BottomTabNavigator.Screen name="Settings" component={SettingsComponent}
+                    <BottomTabNavigator.Screen name="Settings" component={() => <SettingsScreen theme={props.theme} isDarkTheme={props.isDarkMode} setDarkTheme={props.setIsDarkMode} handleLogout={props.onLogout}/>}
                        options={{
                             title: 'Paramètres',
                             tabBarIcon: ({ focused, color, size }) => (

@@ -3,11 +3,28 @@ import { StyleSheet, SafeAreaView, View } from 'react-native';
 import Navigation from './navigation/Navigation';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { darkTheme, lightTheme } from './theme/theme';
 import { Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from "./components/Login/Login";
 
 export default function App() {
+  const [isDarkTheme, setDarkTheme] = useState(false);
+  const theme = isDarkTheme ? darkTheme  : lightTheme;
+
+  useEffect(() => {
+    isDarkThemeStore();
+  }, []);
+
+  const isDarkThemeStore = async () => {
+    try {
+      const isDarkTheme = await AsyncStorage.getItem('isDarkTheme')
+      setDarkTheme(isDarkTheme != null && isDarkTheme === 'true' ? true : false);
+    } catch(e) {
+      console.log("An error has occurred", e);
+    }
+  };
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -38,11 +55,11 @@ export default function App() {
   };
   return (
       <Provider store={store}>
-        <SafeAreaView style={styles.topSafeArea} />
-        <SafeAreaView style={styles.mainSafeArea}>
+      <SafeAreaView style={[styles.topSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}/>
+        <SafeAreaView style={[styles.mainSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}>
           {isLoggedIn ? (
               <PaperProvider>
-              <Navigation onLogout={handleLogout} />
+          <Navigation theme={theme} isDarkMode={isDarkTheme} setIsDarkMode={setDarkTheme} onLogout={handleLogout} />
             </PaperProvider>
           ) : (
               <View style={styles.container}>
@@ -63,10 +80,10 @@ const styles = StyleSheet.create({
   },
   mainSafeArea: {
     flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white'
   },
   topSafeArea: {
     flex: 0,
-    backgroundColor: 'white',
-  },
+    // backgroundColor: 'white'
+  }
 });

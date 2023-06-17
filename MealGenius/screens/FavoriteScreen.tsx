@@ -7,7 +7,11 @@ import { useFocusEffect } from "@react-navigation/native";
 import {Step} from "../models/Step";
 import {Ingredient} from "../models/Ingredient";
 
-const FavoriteScreen = () => {
+type FavoriteScreenProps = {
+    theme: Record<string, string>;
+};
+
+export default function FavoriteScreen(props: FavoriteScreenProps): JSX.Element {
     const [favoriteMeals, setFavoriteMeals] = useState<Meal[]>([]);
     const [isFavoritesChanged, setIsFavoritesChanged] = useState(false);
 
@@ -96,26 +100,26 @@ const FavoriteScreen = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.favoriteItem}>
+        <View style={styles(props.theme).container}>
+            <View style={styles(props.theme).favoriteItem}>
                 <FavoriteCards
                     meals={favoriteMeals}
                     removeFavorite={(meal: Meal) => removeFromFavorites(meal)}
+                    theme={props.theme}
                 />
             </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
+
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.backgroundColor,
     },
     favoriteItem: {
         marginBottom: 30,
         marginHorizontal: 10,
-    },
-});
-
-export default FavoriteScreen;
+    }
+});;

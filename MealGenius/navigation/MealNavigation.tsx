@@ -2,12 +2,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
 
-export default function MealNavigation() {
+interface MealNavigationProps {
+    theme: Record<string, string>,
+}
+export default function MealNavigation(props: MealNavigationProps): JSX.Element {
     const Stack = createStackNavigator();
 
     return (
         <Stack.Navigator initialRouteName="MealList">
-            <Stack.Screen name="MealList" component={HomeScreen} 
+            <Stack.Screen name="MealList" component={() => <HomeScreen theme={props.theme} />} 
                 options={{
                     title: "Meal Genius",
                     headerTitleStyle: {
@@ -17,7 +20,7 @@ export default function MealNavigation() {
                 }}/>
             <Stack.Screen 
                 name="MealDetails"
-                component={MealDetailsScreen}
+                component={(prop) => <MealDetailsScreen {...prop} route={prop.route} theme={props.theme} />}
                 options={({ route }) => ({
                     // @ts-ignore
                     // title: route?.params?.meal?.name || "Détails", 

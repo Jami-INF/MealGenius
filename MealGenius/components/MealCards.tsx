@@ -5,7 +5,8 @@ import { useNavigation } from "@react-navigation/native"
 
 type MealCardsProps = {
     /** The meals to display. */
-    meals: Meal[]
+    meals: Meal[],
+    theme: Record<string, string>
 }
 
 /** Get a list of cards with the meals' names, images, and durations.
@@ -24,7 +25,7 @@ export default function MealCards(props: MealCardsProps): JSX.Element {
 							// @ts-ignore
 							return navigation.navigate('PantryDetails', {meal: item});
 						}}>
-                    <MealCard meal={item}/>
+                    <MealCard meal={item} theme={props.theme}/>
                 </TouchableOpacity>
             </View>
             }

@@ -2,7 +2,8 @@ import { Text } from "react-native";
 
 type TimeProps = {
     time: number,
-    fontSize?: number
+    fontSize?: number,
+    theme?: Record<string, string>
 }
 
 /** Transform the time in minutes to a string.
@@ -18,7 +19,7 @@ type TimeProps = {
  */
 export default function Time(props: TimeProps): JSX.Element {
     return (
-        <Text style={{fontSize: props.fontSize}}>{getTimeText(props.time)}</Text>
+        <Text style={{fontSize: props.fontSize, color: props.theme?.secondaryTextColor}}>{getTimeText(props.time)}</Text>
     )
 }
 

@@ -8,22 +8,23 @@ import DeleteComponent from "./DeleteComponent";
 
 type FavoriteCardProps = {
     meal: Meal,
+    theme: Record<string, string>,
     onDelete: (meal: Meal) => void
 }
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
-        <View style={styles.wrapper}>
-            <View style={styles.main}>
+        <View style={styles(props.theme).wrapper}>
+            <View style={styles(props.theme).main}>
                 <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={props.onDelete}/>}>
-                    <Surface style={styles.card} mode={"flat"}>
-                        <Image style={styles.image} source={{uri: props.meal.image}}/>
-                        <View style={styles.content}>
-                            <Text numberOfLines={1} style={styles.name}>{props.meal.name}</Text>
-                            <Text numberOfLines={2}>{props.meal.description}</Text>
-                            <View style={styles.duration}>
-                                <Ionicons name="time-outline" size={20}/>
-                                <Time time={props.meal.duration} fontSize={15}/>
+                    <Surface style={styles(props.theme).card} mode={"flat"}>
+                        <Image style={styles(props.theme).image} source={{uri: props.meal.image}}/>
+                        <View style={styles(props.theme).content}>
+                            <Text numberOfLines={1} style={styles(props.theme).name}>{props.meal.name}</Text>
+                            <Text numberOfLines={2} style={{color: props.theme.secondaryTextColor}}>{props.meal.description}</Text>
+                            <View style={styles(props.theme).duration}>
+                                <Ionicons name="time-outline" size={20} style={{color: props.theme.secondaryTextColor}}/>
+                                <Time time={props.meal.duration} fontSize={15} theme={props.theme}/>
                             </View>
                         </View>
                     </Surface>
@@ -33,11 +34,12 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     card: {
         width: "auto",
         borderRadius: 20,
         flexDirection: "row",
+        backgroundColor: theme.surfaceColor,
         height: 100
     },
     content: {
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
         width: "100%",
         fontSize: 20,
         fontWeight: "bold",
-        textAlign: "left"
+        textAlign: "left",
+        color: theme.textColor
     },
     duration: {
         fontWeight: "bold",

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import CustomText from "../components/CustomText";
 import { Button, FAB, IconButton } from "react-native-paper";
+import CustomText from "../components/CustomText";
 import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
@@ -12,7 +12,10 @@ import IngredientsModal from "../components/IngredientsModal";
 const meals: Meal[] = getMeals();
 const foods: Food[] = getFoods();
 
-export default function PantryScreen() {
+interface PantryScreenProps {
+    theme: Record<string, string>,
+}
+export default function PantryScreen(props: PantryScreenProps): JSX.Element {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isIngredientsModalVisible, setIngredientsModalVisible] = useState(false);
 
@@ -42,8 +45,8 @@ export default function PantryScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.buttonContainer}>
+        <View style={styles(props.theme).container}>
+            <View style={styles(props.theme).buttonContainer}>
                 
                 <Button icon="fridge" 
                     mode="contained-tonal" 
@@ -58,18 +61,18 @@ export default function PantryScreen() {
 
             </View>
             <View>
-                <MealCards meals={meals}/>
+                <MealCards meals={meals} theme={props.theme}/>
             </View>
-            <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal}/>
-            <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal}/>
+            <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal} theme={props.theme}/>
+            <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal} theme={props.theme}/>
         </View>
     )
 };
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.backgroundColor,
     },
     centered: {
         alignItems: "center"
