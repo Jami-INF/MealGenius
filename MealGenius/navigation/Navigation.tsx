@@ -1,21 +1,22 @@
 import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import SettingsScreen from "../screens/SettingsScreen";
-import FavoriteScreen from "../screens/FavoriteScreen";
 import { Ionicons } from '@expo/vector-icons';
 import MealNavigation from "./MealNavigation";
 import PantryNavigation from "./PantryNavigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Login from "../components/Login/Login";
-interface NavigationProps {
+import React from "react";
+import FavoriteScreen from "../screens/FavoriteScreen";
+
+type NavigationProps = {
     theme: Record<string, string>,
     isDarkMode: boolean,
     setIsDarkMode: Function,
+    onLogout: () => void,
 }
 
 export default function Navigation(props: NavigationProps) {
     const BottomTabNavigator = createBottomTabNavigator();
-    const SettingsComponent = () => <SettingsScreen handleLogout={props.onLogout} />;
 
     return (
         <SafeAreaProvider>
@@ -62,7 +63,7 @@ export default function Navigation(props: NavigationProps) {
                                 fontSize: 32,
                             },
                         }}/>
-                    <BottomTabNavigator.Screen name="Settings" component={() => <SettingsScreen theme={props.theme} isDarkTheme={props.isDarkMode} setDarkTheme={props.setIsDarkMode} />}
+                    <BottomTabNavigator.Screen name="Settings" component={() => <SettingsScreen theme={props.theme} isDarkTheme={props.isDarkMode} setDarkTheme={props.setIsDarkMode} handleLogout={props.onLogout}/>}
                        options={{
                             title: 'Paramètres',
                             tabBarIcon: ({ focused, color, size }) => (

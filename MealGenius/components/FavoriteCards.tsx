@@ -3,7 +3,7 @@ import { Meal } from "../models/Meal"
 import FavoriteCard from "./FavoriteCard";
 import { useNavigation } from "@react-navigation/native"
 
-type FavoriteCards = {
+type FavoriteCardProps = {
     /** The meals to display. */
     meals: Meal[],
     theme: Record<string, string>,

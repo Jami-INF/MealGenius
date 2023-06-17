@@ -34,7 +34,7 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     card: {
         width: "auto",
         borderRadius: 20,

@@ -10,17 +10,17 @@ interface SettingsScreenProps {
     theme: Record<string, string>,
     isDarkTheme: boolean,
     setDarkTheme: Function,
-}
-type SettingsScreenProps = {
     handleLogout: () => void;
 };
+
 export default function SettingsScreen(props: SettingsScreenProps): JSX.Element {
     const [isSwitchOn, setIsSwitchOn] = useState(false);
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
     const navigation = useNavigation();
+
     const onToggleSwitch = async () => { 
         const isDarkTheme = !props.isDarkTheme;
         props.setDarkTheme(isDarkTheme);
+        setIsSwitchOn(!isSwitchOn);
         await AsyncStorage.setItem('isDarkTheme', isDarkTheme ? 'true' : 'false');
     }
     const { theme } = props;
@@ -78,7 +78,7 @@ export default function SettingsScreen(props: SettingsScreenProps): JSX.Element 
                 </View>
 
             </View>
-            <Button mode="outlined" onPress={handleLogout} style={styles.logoutButton}>
+            <Button mode="outlined" onPress={handleLogout} style={styles(theme).logoutButton}>
                 Déconnexion
             </Button>
         </View>
