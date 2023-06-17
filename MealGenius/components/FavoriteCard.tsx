@@ -7,14 +7,15 @@ import { Swipeable } from 'react-native-gesture-handler';
 import DeleteComponent from "./DeleteComponent";
 
 type FavoriteCardProps = {
-    meal: Meal
+    meal: Meal,
+    onDelete: (meal: Meal) => void
 }
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
         <View style={styles.wrapper}>
             <View style={styles.main}>
-                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
+                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={props.onDelete}/>}>
                     <Surface style={styles.card} mode={"flat"}>
                         <Image style={styles.image} source={{uri: props.meal.image}}/>
                         <View style={styles.content}>
@@ -30,10 +31,6 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
             </View>
         </View>
     )
-}
-
-function deleteMeal(meal: Meal): void {
-    console.log("Delete meal: " + meal.name);
 }
 
 const styles = StyleSheet.create({
