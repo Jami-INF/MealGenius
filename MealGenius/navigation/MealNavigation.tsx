@@ -20,7 +20,7 @@ export default function MealNavigation(props: MealNavigationProps): JSX.Element 
                 }}/>
             <Stack.Screen 
                 name="MealDetails"
-                component={MealDetailsScreen}
+                component={(prop) => <MealDetailsScreen {...prop} route={prop.route} theme={props.theme} />}
                 options={({ route }) => ({
                     // @ts-ignore
                     // title: route?.params?.meal?.name || "Détails", 

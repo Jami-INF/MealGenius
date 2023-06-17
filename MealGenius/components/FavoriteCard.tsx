@@ -13,7 +13,7 @@ type FavoriteCardProps = {
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
-        <View style={styles.wrapper}>
+        <View style={styles(props.theme).wrapper}>
             <View style={styles(props.theme).main}>
                 <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
                     <Surface style={styles(props.theme).card} mode={"flat"}>
