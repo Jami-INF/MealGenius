@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { Button, FAB } from "react-native-paper";
+import { Button, FAB, IconButton } from "react-native-paper";
+import CustomText from "../components/CustomText";
 import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
@@ -52,10 +53,12 @@ export default function PantryScreen(props: PantryScreenProps): JSX.Element {
                     onPress={openIngredientsModal}>
                     Mes ingrédients
                 </Button>
-                <FAB icon="plus"
-                    size="small"
-                    onPress={openModal}
-                />
+                
+                <IconButton icon="plus"
+                            size={20}
+                            mode="contained-tonal" 
+                            onPress={openModal}/>
+
             </View>
             <View>
                 <MealCards meals={meals} theme={props.theme}/>
@@ -80,6 +83,7 @@ const styles = (theme) => StyleSheet.create({
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        margin: 20
+        margin: 20,
+        alignItems: "center"
     }
 });

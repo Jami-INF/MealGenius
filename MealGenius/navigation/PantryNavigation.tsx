@@ -23,7 +23,8 @@ export default function PantryNavigation(props: PantryNavigationProps): JSX.Elem
                 component={MealDetailsScreen}
                 options={({ route }) => ({
                     // @ts-ignore
-                    title: route?.params?.meal?.name || "Détails", 
+                    //title: route?.params?.meal?.name || "Détails", 
+                    headerShown: false
                 })}
                     />
         </Stack.Navigator> 

@@ -4,6 +4,7 @@ import store from './redux/store';
 import { Provider} from 'react-redux'
 import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from './theme/theme';
+import { Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
@@ -27,7 +28,9 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaView style={[styles.topSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}/>
         <SafeAreaView style={[styles.mainSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}>
+        <PaperProvider>
           <Navigation theme={theme} isDarkMode={isDarkTheme} setIsDarkMode={setDarkTheme}/>
+        </PaperProvider>
         </SafeAreaView>
     </Provider>
   );

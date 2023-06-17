@@ -1,4 +1,4 @@
-import { Button, Divider, FAB, Modal } from "react-native-paper";
+import { Button, Divider, FAB, Modal, IconButton } from "react-native-paper";
 import { View, StyleSheet, Text } from "react-native";
 import SearchBar from "./SearchBar";
 import { FlatList } from "react-native-gesture-handler";
@@ -26,7 +26,11 @@ export default function IngredientAddModal(props: IngredientAddModalProps): JSX.
                             }}/>
                     </View>
                     <View style={styles(props.theme).fabButton}>
-                        <FAB icon="close" onPress={props.onRequestClose} style={styles(props.theme).closeButton} size="small"/>
+                    <IconButton icon="close"
+                            size={25}
+                            mode="contained-tonal"
+                            style={styles(props.theme).closeButton}
+                            onPress={props.onRequestClose}/>
                     </View>
                     
                 </View>
@@ -36,7 +40,11 @@ export default function IngredientAddModal(props: IngredientAddModalProps): JSX.
                         <View>
                             <View style={styles(props.theme).food}>
                                 <Text style={styles(props.theme).itemName}>{item.name}</Text>
-                                <FAB icon="plus" onPress={() => { } } size="small" />
+                                <IconButton icon="plus"
+                                            size={20}
+                                            mode="contained-tonal"
+                                            style={styles(props.theme).deleteButton}
+                                            onPress={() => console.log(`delete `)}/>
                             </View>
                             <Divider />
                         </View>}
@@ -59,6 +67,10 @@ const styles = (theme) => StyleSheet.create({
         padding: 20
     },
     closeButton: {
+        alignSelf: "flex-end",
+        marginLeft: 12
+    },
+    deleteButton: {
         alignSelf: "flex-end"
     },
     header: {

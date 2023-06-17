@@ -13,22 +13,23 @@ type FavoriteCardProps = {
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
-        <View style={styles(props.theme).main}>
-            <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
-                <Surface style={styles(props.theme).card}>
-                    <Image style={styles(props.theme).image} source={{uri: props.meal.image}}/>
-                    <View style={styles(props.theme).content}>
-                        <Text numberOfLines={1} style={styles(props.theme).name}>{props.meal.name}</Text>
-                        <Text numberOfLines={2} style={{color: props.theme.secondaryTextColor}}>{props.meal.description}</Text>
-                        <View style={styles(props.theme).duration}>
-                            <Ionicons name="time-outline" size={20} style={{color: props.theme.secondaryTextColor}}/>
-                            <Time time={props.meal.duration} fontSize={15} theme={props.theme}/>
+        <View style={styles.wrapper}>
+            <View style={styles(props.theme).main}>
+                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
+                    <Surface style={styles(props.theme).card} mode={"flat"}>
+                        <Image style={styles(props.theme).image} source={{uri: props.meal.image}}/>
+                        <View style={styles(props.theme).content}>
+                            <Text numberOfLines={1} style={styles(props.theme).name}>{props.meal.name}</Text>
+                            <Text numberOfLines={2} style={{color: props.theme.secondaryTextColor}}>{props.meal.description}</Text>
+                            <View style={styles(props.theme).duration}>
+                                <Ionicons name="time-outline" size={20} style={{color: props.theme.secondaryTextColor}}/>
+                                <Time time={props.meal.duration} fontSize={15} theme={props.theme}/>
+                            </View>
                         </View>
-                    </View>
-                </Surface>
-            </Swipeable>
+                    </Surface>
+                </Swipeable>
+            </View>
         </View>
-        
     )
 }
 
@@ -41,7 +42,8 @@ const styles = (theme) => StyleSheet.create({
         width: "auto",
         borderRadius: 20,
         flexDirection: "row",
-        backgroundColor: theme.surfaceColor
+        backgroundColor: theme.surfaceColor,
+        height: 100
     },
     content: {
         justifyContent: "space-between",
@@ -76,7 +78,12 @@ const styles = (theme) => StyleSheet.create({
     main: {
         backgroundColor: 'red',
         margin: 5,
-        borderRadius: 20
+        borderRadius: 20,
+        height: 100
+    },
+    wrapper: {
+        margin: 5,
+        backgroundColor: 'white',
     }
 });
 
