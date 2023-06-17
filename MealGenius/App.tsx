@@ -2,12 +2,26 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import Navigation from "./navigation/Navigation";
 import store from './redux/store';
 import { Provider} from 'react-redux'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { darkTheme, lightTheme } from './theme/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   const [isDarkTheme, setDarkTheme] = useState(false);
   const theme = isDarkTheme ? darkTheme  : lightTheme;
+
+  useEffect(() => {
+    isDarkThemeStore();
+  }, []);
+
+  const isDarkThemeStore = async () => {
+    try {
+      const isDarkTheme = await AsyncStorage.getItem('isDarkTheme')
+      setDarkTheme(isDarkTheme != null && isDarkTheme === 'true' ? true : false);
+    } catch(e) {
+      console.log("An error has occurred", e);
+    }
+  };
 
   return (
     <Provider store={store}>

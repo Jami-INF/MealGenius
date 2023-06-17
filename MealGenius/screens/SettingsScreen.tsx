@@ -3,6 +3,7 @@ import CustomText from "../components/CustomText";
 import { Button, Switch, TextInput } from "react-native-paper";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface SettingsScreenProps {
     theme: Record<string, string>,
@@ -10,8 +11,10 @@ interface SettingsScreenProps {
     setDarkTheme: Function,
 }
 export default function SettingsScreen(props: SettingsScreenProps): JSX.Element {
-    const onToggleSwitch = (): void => { 
-        props.setDarkTheme(!props.isDarkTheme);
+    const onToggleSwitch = async () => { 
+        const isDarkTheme = !props.isDarkTheme;
+        props.setDarkTheme(isDarkTheme);
+        await AsyncStorage.setItem('isDarkTheme', isDarkTheme ? 'true' : 'false');
     }
     const { theme } = props;
 

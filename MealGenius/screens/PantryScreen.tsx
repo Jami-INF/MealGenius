@@ -60,8 +60,8 @@ export default function PantryScreen(props: PantryScreenProps): JSX.Element {
             <View>
                 <MealCards meals={meals} theme={props.theme}/>
             </View>
-            <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal}/>
-            <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal}/>
+            <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal} theme={props.theme}/>
+            <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal} theme={props.theme}/>
         </View>
     )
 };
