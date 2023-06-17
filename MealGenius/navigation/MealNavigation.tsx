@@ -20,7 +20,8 @@ export default function MealNavigation() {
                 component={MealDetailsScreen}
                 options={({ route }) => ({
                     // @ts-ignore
-                    title: route?.params?.meal?.name || "Détails", 
+                    // title: route?.params?.meal?.name || "Détails", 
+                    headerShown: false
                 })}
                     />
         </Stack.Navigator> 

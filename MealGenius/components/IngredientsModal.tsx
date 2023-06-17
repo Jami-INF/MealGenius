@@ -1,4 +1,4 @@
-import { Divider, FAB, Modal } from "react-native-paper";
+import { Divider, FAB, IconButton, Modal } from "react-native-paper";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import { getFoods } from "../stub/stub";
 import { Food } from "../models/Food";
@@ -25,7 +25,11 @@ export default function IngredientsModal(props: IngredientsModalProps): JSX.Elem
                             }}/>
                     </View>
                     <View style={styles.fabButton}>
-                        <FAB icon="close" onPress={props.onRequestClose} style={styles.closeButton} size="small"/>
+                        <IconButton icon="close"
+                            size={25}
+                            mode="contained-tonal"
+                            style={styles.closeButton}
+                            onPress={props.onRequestClose}/>
                     </View>
                     
                 </View>
@@ -35,7 +39,12 @@ export default function IngredientsModal(props: IngredientsModalProps): JSX.Elem
                         <View>
                             <View style={styles.food}>
                                 <Text>{item.name}</Text>
-                                <FAB icon="minus" onPress={() => { } } size="small" />
+                                <IconButton icon="minus"
+                                            size={20}
+                                            mode="contained-tonal"
+                                            style={styles.deleteButton}
+                                            onPress={() => console.log(`delete `)}/>
+                                
                             </View>
                             <Divider />
                         </View>}
@@ -57,6 +66,10 @@ const styles = StyleSheet.create({
         padding: 20
     },
     closeButton: {
+        alignSelf: "flex-end",
+        marginLeft: 12
+    },
+    deleteButton: {
         alignSelf: "flex-end"
     },
     header: {

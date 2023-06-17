@@ -12,22 +12,23 @@ type FavoriteCardProps = {
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
-        <View style={styles.main}>
-            <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
-                <Surface style={styles.card}>
-                    <Image style={styles.image} source={{uri: props.meal.image}}/>
-                    <View style={styles.content}>
-                        <Text numberOfLines={1} style={styles.name}>{props.meal.name}</Text>
-                        <Text numberOfLines={2}>{props.meal.description}</Text>
-                        <View style={styles.duration}>
-                            <Ionicons name="time-outline" size={20}/>
-                            <Time time={props.meal.duration} fontSize={15}/>
+        <View style={styles.wrapper}>
+            <View style={styles.main}>
+                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={deleteMeal}/>}>
+                    <Surface style={styles.card} mode={"flat"}>
+                        <Image style={styles.image} source={{uri: props.meal.image}}/>
+                        <View style={styles.content}>
+                            <Text numberOfLines={1} style={styles.name}>{props.meal.name}</Text>
+                            <Text numberOfLines={2}>{props.meal.description}</Text>
+                            <View style={styles.duration}>
+                                <Ionicons name="time-outline" size={20}/>
+                                <Time time={props.meal.duration} fontSize={15}/>
+                            </View>
                         </View>
-                    </View>
-                </Surface>
-            </Swipeable>
+                    </Surface>
+                </Swipeable>
+            </View>
         </View>
-        
     )
 }
 
@@ -39,7 +40,8 @@ const styles = StyleSheet.create({
     card: {
         width: "auto",
         borderRadius: 20,
-        flexDirection: "row"
+        flexDirection: "row",
+        height: 100
     },
     content: {
         justifyContent: "space-between",
@@ -73,7 +75,12 @@ const styles = StyleSheet.create({
     main: {
         backgroundColor: 'red',
         margin: 5,
-        borderRadius: 20
+        borderRadius: 20,
+        height: 100
+    },
+    wrapper: {
+        margin: 5,
+        backgroundColor: 'white',
     }
 });
 
