@@ -7,7 +7,8 @@ type TextProps = {
     text: string,
     textType: TextType,
     ellipsizeMode?: ellipsizeMode,
-    numebrofLines?: number
+    numebrofLines?: number,
+    style?: StyleSheet
 }
 
 /** Display a text with a specific style.
