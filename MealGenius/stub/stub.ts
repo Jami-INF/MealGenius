@@ -26,9 +26,9 @@ export function getMeals(): Meal[] {
         ],
         "main course",
         [
-            new Step("1", "Boil water", 5, 30),
-            new Step("2", "Cook pasta", 5, 30),
-            new Step("3", "Serve", 5, 30),
+            new Step("1", "Découper le poulet en morceaux, nettoyer les moules, émincer le chorizo et les poivrons, peler et concasser les tomates, hacher les oignons et l'ail.", 5, 10),
+            new Step("2", "Mettre l'huile dans le plat et faire dorer les morceaux de poulet. Ajouter les calamars, les oignons tout en remuant puis mettre les tomates, les poivrons, l'ail, le safran, le sel et le poivre. Laisser cuire 5 minutes en remuant avant d'incorporer le riz, le chorizo et le bouillon.", 5, 70),
+            new Step("3", "Y plonger les crevettes et les moules, porter à ébullition puis laisser cuire environ 30-35 minutes.", 5, 30),
         ],
             "easy"
      );
@@ -56,9 +56,9 @@ export function getMeals(): Meal[] {
     let pizza: Meal = new Meal(
         "3",
         "Pizza de la Mama ! Si si ma que bela !",
-        "A pizza.",
+        "C'est une pizza, un evrai pizza ! Elle est italienne ? Non américaine ! Je te jure Whallah ! C'est la pizza de la mama ! Si si ma que bela !",
         image,
-        30,
+        250,
         [
             new Ingredient("13", foods[9], "g", 200),
             new Ingredient("14", foods[10], "g", 100),

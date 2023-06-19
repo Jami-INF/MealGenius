@@ -4,39 +4,42 @@ import CustomText from "./CustomText";
 import IngredientsCapsuleList from "./IngredientsCapsuleList";
 import { Meal } from "../models/Meal";
 import Time from "./Time";
+import { Surface } from 'react-native-paper';
 
 type MealInformationSheetProps = {
-    meal: Meal
+    meal: Meal,
+    theme: Record<string, string>
 }
 
 export default function MealInformationSheet(props: MealInformationSheetProps): JSX.Element {
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.title}>
-                    <CustomText text={props.meal.name} textType="subtitle"/>
+        <Surface style={styles(props.theme).container}>
+            <View style={styles(props.theme).header}>
+                <View style={styles(props.theme).title}>
+                    <CustomText text={props.meal.name} textType="subtitle" theme={props.theme}/>
                 </View>
-                <View style={styles.clock}>
-                    <Ionicons name="time-outline" size={30}/>
-                    <Time time={props.meal.duration} fontSize={20}/>
+                <View style={styles(props.theme).clock}>
+                    <Ionicons name="time-outline" size={30} style={{color: props.theme.secondaryTextColor}}/>
+                    <Time time={props.meal.duration} fontSize={20} theme={props.theme}/>
                 </View>
             </View>
 
 
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
+            <Image style={styles(props.theme).image} source={{uri: props.meal.image
+            }}/>
             {/* <CustomImage imageType={props.meal.image.type} imageName={props.meal.image.name} imageExtension={props.meal.image.extension}/> */}
 
-            <View style={styles.mainText}>
-                <CustomText text={props.meal.description} textType="paragraph"/>
-                <View style={styles.ingredients}>
-                    <IngredientsCapsuleList ingredients={props.meal.ingredients}/>
+            <View style={styles(props.theme).mainText}>
+                <CustomText text={props.meal.description} textType="paragraph" theme={props.theme}/>
+                <View style={styles(props.theme).ingredients}>
+                    <IngredientsCapsuleList ingredients={props.meal.ingredients} theme={props.theme}/>
                 </View>
             </View>
-        </View>
+        </Surface>
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     title: {
         marginHorizontal: 10
     },
@@ -48,14 +51,13 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: "column",
-        borderWidth: 1,
         borderRadius: 20,
+        backgroundColor: theme.surfaceColor
       },
     header: {
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
-        borderBottomWidth: 1,
         maxHeight: 50,
         textAlignVertical: "center"
     },

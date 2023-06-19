@@ -1,4 +1,4 @@
-import { Button, Divider, FAB, Modal } from "react-native-paper";
+import { Button, Divider, FAB, Modal, IconButton } from "react-native-paper";
 import { View, StyleSheet, Text } from "react-native";
 import SearchBar from "./SearchBar";
 import { FlatList } from "react-native-gesture-handler";
@@ -8,24 +8,29 @@ import { Food } from "../models/Food";
 type IngredientAddModalProps = {
     visible:boolean,
     onRequestClose: () => void,
-    onRequestValidate: () => void
+    onRequestValidate: () => void,
+    theme: Record<string, string>
 }
 
 let ingredientsSearched: Food[] = getFoods();
 
 export default function IngredientAddModal(props: IngredientAddModalProps): JSX.Element {
     return (
-        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles.modal}>
+        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles(props.theme).modal}>
             <View>
-                <View style={styles.header}>
-                    <View style={styles.searchBar}>
+                <View style={styles(props.theme).header}>
+                    <View style={styles(props.theme).searchBar}>
                         <SearchBar placeholder={"Rechercher un ingrédient"} 
                             onChangeText={function (text: string): void {
                                 console.log(text);
                             }}/>
                     </View>
-                    <View style={styles.fabButton}>
-                        <FAB icon="close" onPress={props.onRequestClose} style={styles.closeButton} size="small"/>
+                    <View style={styles(props.theme).fabButton}>
+                    <IconButton icon="close"
+                            size={25}
+                            mode="contained-tonal"
+                            style={styles(props.theme).closeButton}
+                            onPress={props.onRequestClose}/>
                     </View>
                     
                 </View>
@@ -33,31 +38,39 @@ export default function IngredientAddModal(props: IngredientAddModalProps): JSX.
                     <FlatList data={ingredientsSearched} 
                         renderItem={({item}) => 
                         <View>
-                            <View style={styles.food}>
-                                <Text>{item.name}</Text>
-                                <FAB icon="plus" onPress={() => { } } size="small" />
+                            <View style={styles(props.theme).food}>
+                                <Text style={styles(props.theme).itemName}>{item.name}</Text>
+                                <IconButton icon="plus"
+                                            size={20}
+                                            mode="contained-tonal"
+                                            style={styles(props.theme).deleteButton}
+                                            onPress={() => console.log(`delete `)}/>
                             </View>
                             <Divider />
                         </View>}
                         keyExtractor={(item) => item.id.toString()}
-                        style={styles.FlatList}
+                        style={styles(props.theme).FlatList}
                     />
-                    <Button style={styles.Validate} onPress={() => props.onRequestValidate} mode="contained">Valider</Button>
+                    <Button style={styles(props.theme).Validate} onPress={() => props.onRequestValidate} mode="contained">Valider</Button>
                 </View>
             </View>
         </Modal>
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     modal: {
-        backgroundColor: "white",
+        backgroundColor: theme.surfaceColor,
         margin: 20,
         height: "90%",
         borderRadius: 20,
         padding: 20
     },
     closeButton: {
+        alignSelf: "flex-end",
+        marginLeft: 12
+    },
+    deleteButton: {
         alignSelf: "flex-end"
     },
     header: {
@@ -86,5 +99,8 @@ const styles = StyleSheet.create({
     },
     Validate: {
         marginTop: 10
+    },
+    itemName: {
+        color: theme.textColor
     }
 });

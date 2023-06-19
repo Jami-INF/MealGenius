@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, } from "react";
 import { getMealList } from '../redux/actions/actionMealList';
 
-export default function HomeScreen() {
+interface HomeScreenProps {
+    theme: Record<string, string>,
+}
+export default function HomeScreen(props: HomeScreenProps): JSX.Element {
     const navigation = useNavigation();
     // @ts-ignore
     const mealList = useSelector(state => state.mealReducer.mealList);
@@ -23,16 +26,16 @@ export default function HomeScreen() {
     
     return (
         <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.searchBar}>
+            <View style={styles(props.theme).container}>
+                <View style={styles(props.theme).searchBar}>
                 <SearchBar placeholder="Rechercher un plat"
                     onChangeText={function (text: string): void {
                         console.log(text);
                     } }/>
                 </View>
-                <View style={styles.MealSheet}>
-                    <View style={styles.MealSheetTitle}>
-                        <CustomText text="Plat du jour" textType="subtitle"/>
+                <View style={styles(props.theme).MealSheet}>
+                    <View style={styles(props.theme).MealSheetTitle}>
+                        <CustomText text="Plat du jour" textType="subtitle" theme={props.theme}/>
                     </View>
                     { mealList.length != 0 ?
                         <TouchableOpacity 
@@ -40,14 +43,14 @@ export default function HomeScreen() {
                                 // @ts-ignore
                                 return navigation.navigate('MealDetails', {meal: mealList[0]});
                             }}>
-                            <MealInformationSheet meal={mealList[0]}/>
+                            <MealInformationSheet meal={mealList[0]} theme={props.theme}/>
                         </TouchableOpacity>
                         : ""
                     }
                 </View>
-                <View style={styles.MealSheet}>
-                    <View style={styles.MealSheetTitle}>
-                        <CustomText text="Désert du jour" textType="subtitle"/>
+                <View style={styles(props.theme).MealSheet}>
+                    <View style={styles(props.theme).MealSheetTitle}>
+                        <CustomText text="Désert du jour" textType="subtitle" theme={props.theme}/>
                     </View>
                     { mealList.length != 0 ?
                         <TouchableOpacity 
@@ -55,7 +58,7 @@ export default function HomeScreen() {
                                 // @ts-ignore
                                 return navigation.navigate('MealDetails', {meal: mealList[1]});
                             }}>
-                        <MealInformationSheet meal={mealList[1]}/>
+                        <MealInformationSheet meal={mealList[1]} theme={props.theme}/>
                         </TouchableOpacity>
                         : ""
                     }
@@ -65,10 +68,10 @@ export default function HomeScreen() {
     )
   };
   
-  const styles = StyleSheet.create({
+  const styles = (theme) => StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
+      backgroundColor: theme.backgroundColor,
     },
     MealSheet: {
         marginBottom: 30,

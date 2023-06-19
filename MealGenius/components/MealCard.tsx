@@ -3,9 +3,11 @@ import { View, StyleSheet, Image } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
+import { Surface } from 'react-native-paper';
 
 type MealCardProps = {
-    meal: Meal
+    meal: Meal,
+    theme: Record<string, string>
 }
 
 /** Get a card with the meal's name, image, and duration
@@ -13,29 +15,32 @@ type MealCardProps = {
  */
 export default function MealCard(props: MealCardProps): JSX.Element {
     return (
-        <View style={styles.card}>
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
-            <View style={styles.header}>
-                <View style={styles.title}>
+        <Surface style={styles(props.theme).card}>
+            <Image style={styles(props.theme).image} source={{uri: props.meal.image}}/>
+            <View style={styles(props.theme).header}>
+                <View style={styles(props.theme).title}>
                     <CustomText text={props.meal.name}
-                        textType="card"
+                        textType="subtitle"
                         ellipsizeMode="tail"
-                        numebrofLines={1}/>
+                        numberofLines={1}
+                        theme={props.theme}/>
                 </View>
-                <View style={styles.clock}>
-                    <Ionicons name="time-outline" size={30}/>
-                    <Time time={props.meal.duration} fontSize={20}/>
+                <View style={styles(props.theme).clock}>
+                    <Ionicons name="time-outline" size={30} style={{color: props.theme.secondaryTextColor}}/>
+                    <Time time={props.meal.duration} fontSize={20} theme={props.theme}/>
                 </View>
             </View>
-        </View>
+        </Surface>
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     card: {
         width: 300,
         borderRadius: 20,
-        borderWidth: 1,
+        marginHorizontal: 3,
+        marginVertical: 3,
+        backgroundColor: theme.surfaceColor
     },
     title: {
         flex: 1,
