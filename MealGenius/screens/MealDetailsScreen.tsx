@@ -1,26 +1,24 @@
 import { Image, StyleSheet, View, FlatList } from "react-native";
-import { Meal } from "../models/Meal";
+import { Meal } from '../models/Meal';
 import { ScrollView } from "react-native-gesture-handler";
 import BackButton from "../components/BackButton";
 import CustomText from "../components/CustomText";
 import { Divider, IconButton, Portal, Surface, Text } from "react-native-paper";
 import Time from "../components/Time";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Ingredient } from "../models/Ingredient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRoute } from "@react-navigation/native";
+import { DarkThemeContext } from "../App";
 
-type MealDetailsScreenProps = {
-    route: {
-        params: {
-            meal: Meal;
-        }
-    },
-};
-
-export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.Element  {
+export default function MealDetailsScreen(): JSX.Element  {
+    const route = useRoute();
+    // @ts-ignore
+    const meal: Meal = route.params.meal;
 
     const [isFavorite, setIsFavorite] = useState(false); // État du plat favori
+    const { theme } = useContext(DarkThemeContext);
 
     useEffect(() => {
         checkFavoriteStatus(); // Vérifier si le plat est déjà en favori lors du chargement du composant
@@ -47,7 +45,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
             const favorites = await getFavorites();
             if (favorites) {
                 const isAlreadyFavorite = favorites.some(
-                    (favorite: Meal) => favorite.id === props.route.params.meal.id
+                    (favorite: Meal) => favorite.id === meal.id
                 );
                 setIsFavorite(isAlreadyFavorite);
             } else {
@@ -107,15 +105,15 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
     };
     const handleFavoritePress = async () => {
         if (isFavorite) {
-            await removeFromFavorites(props.route.params.meal); // Supprimer le plat des favoris
+            await removeFromFavorites(meal); // Supprimer le plat des favoris
         } else {
-            await addToFavorites(props.route.params.meal); // Ajouter le plat aux favoris
+            await addToFavorites(meal); // Ajouter le plat aux favoris
         }
     };
 
 
         return (
-            <View style={styles.container}>
+            <View style={styles(theme).container}>
                 <BackButton/>
                 <Portal>
                     <IconButton
@@ -124,47 +122,47 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
                         size={30}
                         iconColor="black"
                         mode="contained-tonal"
-                        style={styles.favoriteButton}
+                        style={styles(theme).favoriteButton}
                         animated={true}
                     />
                 </Portal>
 
-                <Image style={styles.image} source={{uri: props.route.params.meal.image}}/>
+                <Image style={styles(theme).image} source={{uri: meal.image}}/>
 
-                <ScrollView style={styles.scrollview}
+                <ScrollView style={styles(theme).scrollview}
                             bounces={false}>
 
-                    <View style={styles.body}>
-                        <View style={styles.title}>
-                            <CustomText text={props.route.params.meal.name} textType="title"/>
+                    <View style={styles(theme).body}>
+                        <View style={styles(theme).title}>
+                            <CustomText text={meal.name} textType="title"/>
                         </View>
 
-                        <View style={styles.mealInformation}>
+                        <View style={styles(theme).mealInformation}>
                             <CustomText text={"Ingrédients"} textType="subtitle"/>
-                            <FlatList data={props.route.params.meal.ingredients}
-                                      renderItem={({item}) => <Text style={styles.ingredient} >{getIngredientText(item)}</Text>}
-                                      style={styles.ingredients}
+                            <FlatList data={meal.ingredients}
+                                      renderItem={({item}) => <Text style={styles(theme).ingredient} >{getIngredientText(item)}</Text>}
+                                      style={styles(theme).ingredients}
                                       scrollEnabled={false}/>
 
-                            <Divider style={styles.divider}/>
+                            <Divider style={styles(theme).divider}/>
 
                             <CustomText text={"Préparation"} textType="subtitle"/>
 
-                            <FlatList data={props.route.params.meal.steps}
-                                      style={styles.steps}
+                            <FlatList data={meal.steps}
+                                      style={styles(theme).steps}
                                       scrollEnabled={false}
                                       renderItem={({item, index}) =>
-                                          <Surface style={styles.card}>
+                                          <Surface style={styles(theme).card}>
                                               <View>
-                                                  <View style={styles.cardHeader}>
-                                                      <Text variant="titleLarge" style={styles.titlesStep}>{`Etape ${index + 1}`}</Text>
-                                                      <View style={styles.clock}>
-                                                          <Ionicons name="time-outline" size={20}/>
+                                                  <View style={styles(theme).cardHeader}>
+                                                      <Text variant="titleLarge" style={styles(theme).titlesStep}>{`Etape ${index + 1}`}</Text>
+                                                      <View style={styles(theme).clock}>
+                                                          <Ionicons name="time-outline" style={{color: theme.secondaryTextColor}} size={20}/>
                                                           <Time time={item.duration} fontSize={17}/>
                                                       </View>
                                                   </View>
 
-                                                  <Text style={styles.step}>{item.description}</Text>
+                                                  <Text style={styles(theme).step}>{item.description}</Text>
                                               </View>
                                           </Surface>}/>
 
@@ -180,9 +178,9 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
         return `- ${ingredient.quantity} ${ingredient.unit} de ${ingredient.food.name}`;
     }
 
-    const styles = StyleSheet.create({
+    const styles = (theme) => StyleSheet.create({
         container: {
-            flex: 1
+            flex: 1,
         },
         image: {
             position: 'absolute',
@@ -194,7 +192,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
         },
         body: {
             borderRadius: 20,
-            backgroundColor: 'white',
+            backgroundColor: theme.surfaceColor,
             marginTop: 230,
             minHeight: 700
         },
@@ -210,6 +208,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
             marginHorizontal: 30,
         },
         ingredient: {
+            color: theme.textColor,
             marginVertical: 10,
             marginLeft: 10,
         },
@@ -222,7 +221,8 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
         },
         step: {
             marginVertical: 10,
-            marginHorizontal: 10
+            marginHorizontal: 10,
+            color: theme.textColor,
         },
         titleStep: {
             marginVertical: 10,
@@ -234,6 +234,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
             marginTop: 5,
             marginBottom: 10,
             marginHorizontal: 10,
+            color: theme.textColor
         },
         card: {
             width: "auto",
@@ -243,7 +244,8 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
             minWidth: "100%",
             height: "auto",
             marginHorizontal: 3,
-            marginVertical: 10
+            marginVertical: 10,
+            backgroundColor: theme.backgroundColor
         },
         divider: {
             marginVertical: 10
@@ -251,7 +253,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
         clock: {
             flexDirection: "row",
             alignItems: "center",
-            marginHorizontal: 10
+            marginHorizontal: 10,
         },
         cardHeader: {
             flexDirection: "row",

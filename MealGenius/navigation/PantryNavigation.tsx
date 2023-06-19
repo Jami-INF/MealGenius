@@ -19,9 +19,8 @@ export default function PantryNavigation(): JSX.Element {
                 }}/>
             <Stack.Screen 
                 name="PantryDetails"
-                component={(prop) => <MealDetailsScreen {...prop} route={prop.route}/>}
+                component={MealDetailsScreen}
                 options={({ route }) => ({
-                    // @ts-ignore
                     headerShown: false
                 })}
                     />
