@@ -2,34 +2,36 @@ import { Divider, FAB, IconButton, Modal } from "react-native-paper";
 import { FlatList, StyleSheet, View, Text } from "react-native";
 import { getFoods } from "../stub/stub";
 import { Food } from "../models/Food";
-import React from "react";
+import React, { useContext } from "react";
 import SearchBar from "./SearchBar";
+import { DarkThemeContext } from "../App";
 
 type IngredientsModalProps = {
     visible:boolean,
     onRequestClose: () => void,
     onRequestValidate: () => void,
-    theme: Record<string, string>
 }
 
 const foods: Food[] = getFoods();
 
 export default function IngredientsModal(props: IngredientsModalProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles(props.theme).modal}>
+        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles(theme).modal}>
             <View>
-                <View style={styles(props.theme).header}>
-                    <View style={styles(props.theme).searchBar}>
+                <View style={styles(theme).header}>
+                    <View style={styles(theme).searchBar}>
                         <SearchBar placeholder={"Rechercher un ingrédient"} 
                             onChangeText={function (text: string): void {
                                 console.log(text);
                             }}/>
                     </View>
-                    <View style={styles(props.theme).fabButton}>
+                    <View style={styles(theme).fabButton}>
                         <IconButton icon="close"
                             size={25}
                             mode="contained-tonal"
-                            style={styles(props.theme).closeButton}
+                            style={styles(theme).closeButton}
                             onPress={props.onRequestClose}/>
                     </View>
                     
@@ -38,18 +40,18 @@ export default function IngredientsModal(props: IngredientsModalProps): JSX.Elem
                     <FlatList data={foods} 
                         renderItem={({item}) => 
                         <View>
-                            <View style={styles(props.theme).food}>
-                                <Text style={styles(props.theme).itemName}>{item.name}</Text>
+                            <View style={styles(theme).food}>
+                                <Text style={styles(theme).itemName}>{item.name}</Text>
                                 <IconButton icon="minus"
                                             size={20}
                                             mode="contained-tonal"
-                                            style={styles(props.theme).deleteButton}
+                                            style={styles(theme).deleteButton}
                                             onPress={() => console.log(`delete `)}/>
                             </View>
                             <Divider />
                         </View>}
                         keyExtractor={(item) => item.id.toString()}
-                        style={styles(props.theme).FlatList}
+                        style={styles(theme).FlatList}
                     />
                 </View>
             </View>

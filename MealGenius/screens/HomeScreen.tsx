@@ -5,46 +5,45 @@ import { Meal } from "../models/Meal";
 import { getMeals } from "../stub/stub"
 import SearchBar from "../components/SearchBar";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { DarkThemeContext } from "../App";
 
 const meals: Meal[] = getMeals();
 
-interface HomeScreenProps {
-    theme: Record<string, string>,
-}
-export default function HomeScreen(props: HomeScreenProps): JSX.Element {
+export default function HomeScreen(): JSX.Element {
     const navigation = useNavigation();
-
+    const { theme } = useContext(DarkThemeContext);
     return (
         <ScrollView>
-            <View style={styles(props.theme).container}>
-                <View style={styles(props.theme).searchBar}>
+            <View style={styles(theme).container}>
+                <View style={styles(theme).searchBar}>
                 <SearchBar placeholder="Rechercher un plat"
                     onChangeText={function (text: string): void {
                         console.log(text);
                     } }/>
                 </View>
-                <View style={styles(props.theme).MealSheet}>
-                    <View style={styles(props.theme).MealSheetTitle}>
-                        <CustomText text="Plat du jour" textType="subtitle" theme={props.theme}/>
+                <View style={styles(theme).MealSheet}>
+                    <View style={styles(theme).MealSheetTitle}>
+                        <CustomText text="Plat du jour" textType="subtitle"/>
                     </View>
                     <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
 							return navigation.navigate('MealDetails', {meal: meals[0]});
 						}}>
-                        <MealInformationSheet meal={meals[0]} theme={props.theme}/>
+                        <MealInformationSheet meal={meals[0]}/>
                     </TouchableOpacity>
                 </View>
-                <View style={styles(props.theme).MealSheet}>
-                    <View style={styles(props.theme).MealSheetTitle}>
-                        <CustomText text="Désert du jour" textType="subtitle" theme={props.theme}/>
+                <View style={styles(theme).MealSheet}>
+                    <View style={styles(theme).MealSheetTitle}>
+                        <CustomText text="Désert du jour" textType="subtitle"/>
                     </View>
                     <TouchableOpacity 
 						onPress={() => {
 							// @ts-ignore
 							return navigation.navigate('MealDetails', {meal: meals[1]});
 						}}>
-                    <MealInformationSheet meal={meals[1]} theme={props.theme}/>
+                    <MealInformationSheet meal={meals[1]}/>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Meal } from "../models/Meal";
 import FavoriteCards from "../components/FavoriteCards";
@@ -6,14 +6,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import {Step} from "../models/Step";
 import {Ingredient} from "../models/Ingredient";
+import { DarkThemeContext } from "../App";
 
-type FavoriteScreenProps = {
-    theme: Record<string, string>;
-};
-
-export default function FavoriteScreen(props: FavoriteScreenProps): JSX.Element {
+export default function FavoriteScreen(): JSX.Element {
     const [favoriteMeals, setFavoriteMeals] = useState<Meal[]>([]);
     const [isFavoritesChanged, setIsFavoritesChanged] = useState(false);
+    const { theme } = useContext(DarkThemeContext);
 
     useFocusEffect(
         useCallback(() => {
@@ -100,12 +98,11 @@ export default function FavoriteScreen(props: FavoriteScreenProps): JSX.Element 
     };
 
     return (
-        <View style={styles(props.theme).container}>
-            <View style={styles(props.theme).favoriteItem}>
+        <View style={styles(theme).container}>
+            <View style={styles(theme).favoriteItem}>
                 <FavoriteCards
                     meals={favoriteMeals}
                     removeFavorite={(meal: Meal) => removeFromFavorites(meal)}
-                    theme={props.theme}
                 />
             </View>
         </View>

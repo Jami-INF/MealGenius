@@ -16,7 +16,6 @@ type MealDetailsScreenProps = {
             meal: Meal;
         }
     },
-    theme: Record<string, string>
 };
 
 export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.Element  {
@@ -137,11 +136,11 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
 
                     <View style={styles.body}>
                         <View style={styles.title}>
-                            <CustomText text={props.route.params.meal.name} textType="title" theme={props.theme}/>
+                            <CustomText text={props.route.params.meal.name} textType="title"/>
                         </View>
 
                         <View style={styles.mealInformation}>
-                            <CustomText text={"Ingrédients"} textType="subtitle" theme={props.theme}/>
+                            <CustomText text={"Ingrédients"} textType="subtitle"/>
                             <FlatList data={props.route.params.meal.ingredients}
                                       renderItem={({item}) => <Text style={styles.ingredient} >{getIngredientText(item)}</Text>}
                                       style={styles.ingredients}
@@ -149,7 +148,7 @@ export default function MealDetailsScreen(props: MealDetailsScreenProps): JSX.El
 
                             <Divider style={styles.divider}/>
 
-                            <CustomText text={"Préparation"} textType="subtitle" theme={props.theme}/>
+                            <CustomText text={"Préparation"} textType="subtitle"/>
 
                             <FlatList data={props.route.params.meal.steps}
                                       style={styles.steps}

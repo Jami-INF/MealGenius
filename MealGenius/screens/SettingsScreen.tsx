@@ -1,29 +1,27 @@
 import {View, StyleSheet} from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, Switch, TextInput } from "react-native-paper";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
+import { DarkThemeContext } from "../App";
 
 interface SettingsScreenProps {
-    theme: Record<string, string>,
-    isDarkTheme: boolean,
-    setDarkTheme: Function,
     handleLogout: () => void;
 };
 
 export default function SettingsScreen(props: SettingsScreenProps): JSX.Element {
     const [isSwitchOn, setIsSwitchOn] = useState(false);
     const navigation = useNavigation();
+    const { theme, isDarkTheme, setDarkTheme } = useContext(DarkThemeContext);
 
     const onToggleSwitch = async () => { 
-        const isDarkTheme = !props.isDarkTheme;
-        props.setDarkTheme(isDarkTheme);
-        setIsSwitchOn(!isSwitchOn);
-        await AsyncStorage.setItem('isDarkTheme', isDarkTheme ? 'true' : 'false');
+        const darkTheme = !isDarkTheme;
+        setDarkTheme(darkTheme);
+        setIsSwitchOn(darkTheme);
+        await AsyncStorage.setItem('isDarkTheme', darkTheme ? 'true' : 'false');
     }
-    const { theme } = props;
 
     const handleLogout = () => {
         props.handleLogout();
@@ -33,7 +31,7 @@ export default function SettingsScreen(props: SettingsScreenProps): JSX.Element 
         <View style={styles(theme).container}>
             <View style={styles(theme).centered}>
                 <View style={styles(theme).accountSubtitle}>
-                    <CustomText text={"Compte"} textType={"subtitle"} theme={theme} />
+                    <CustomText text={"Compte"} textType={"subtitle"}/>
                 </View>
                 <View style={styles(theme).settingUpdate}>
                     <TextInput label={"Prénom"} 
@@ -69,10 +67,10 @@ export default function SettingsScreen(props: SettingsScreenProps): JSX.Element 
                     <Button children={"Valider"} mode="contained-tonal" onPress={() => {}} style={styles(theme).validateButton}/>
                 </View>
                 <View style={styles(theme).theme}>
-                    <CustomText text={"Thème"} textType={"subtitle"} theme={theme}/>
+                    <CustomText text={"Thème"} textType={"subtitle"}/>
                     <View style={styles(theme).switch}>
                     <Ionicons name="sunny-outline" size={30} style={{color: theme.secondaryTextColor}}/>
-                    <Switch value={props.isDarkTheme} onValueChange={onToggleSwitch} />
+                    <Switch value={isDarkTheme} onValueChange={onToggleSwitch} />
                     <Ionicons name="moon-outline" size={30} style={{color: theme.secondaryTextColor}}/>
                 </View>
                 </View>

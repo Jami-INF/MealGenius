@@ -4,7 +4,6 @@ import { Ingredient } from "../models/Ingredient";
 
 type IngredientsCapsuleListProps = {
     ingredients: Ingredient[],
-    theme: Record<string, string>
 }
 
 export default function IngredientsCapsuleList(props: IngredientsCapsuleListProps): JSX.Element {
@@ -13,7 +12,7 @@ export default function IngredientsCapsuleList(props: IngredientsCapsuleListProp
             {props.ingredients.map((ingredient, index) => {
                 return (
                     <View style={styles.ingredientView}  key={index}>
-                        <IngredientCapsule ingredient={ingredient} theme={props.theme}/>
+                        <IngredientCapsule ingredient={ingredient}/>
                     </View>
                 )
             })}
