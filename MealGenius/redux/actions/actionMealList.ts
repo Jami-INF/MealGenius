@@ -1,14 +1,16 @@
 import { Meal } from "../../models/Meal";
+import { getMeals } from "../../stub/stub";
 import { FETCH_MEAL_LIST, URL_API } from "../constants";
 
 export const setMealList = (mealList: Meal[]) => {
-    return {
-      type: FETCH_MEAL_LIST,
-      payload: mealList,
-    };
+  return {
+    type: FETCH_MEAL_LIST,
+    payload: mealList,
+  };
 }
 
 export const getMealList = () => {
+    let mealList: Meal[] = [];
     return async dispatch => {
       try {
         const mealPromise = await fetch(URL_API + '/meals');
@@ -17,7 +19,7 @@ export const getMealList = () => {
         }
         const mealListJson = await mealPromise.json();
 
-        const mealList: Meal[] = mealListJson.map(elt => new Meal(
+        mealList = mealListJson.map(elt => new Meal(
             elt["id"],
             elt["name"],
             elt["description"],
@@ -29,9 +31,13 @@ export const getMealList = () => {
             elt["complexity"]
           )
         );
-        dispatch(setMealList(mealList));
       } catch (error) {
         console.log('Error (cannot build meal list from json) : ', error);
+      } finally {
+        if (mealList.length == 0) {
+          mealList = getMeals();
+        }
+        dispatch(setMealList(mealList));
       }
     }
   }

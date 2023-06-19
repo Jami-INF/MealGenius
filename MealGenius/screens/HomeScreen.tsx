@@ -1,16 +1,26 @@
 import {View, StyleSheet, ScrollView, TouchableOpacity} from "react-native";
 import CustomText from "../components/CustomText";
 import MealInformationSheet from "../components/MealInfomationSheet";
-import { Meal } from "../models/Meal";
-import { getMeals } from "../stub/stub"
 import SearchBar from "../components/SearchBar";
 import { useNavigation } from "@react-navigation/native";
-
-const meals: Meal[] = getMeals();
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, } from "react";
+import { getMealList } from '../redux/actions/actionMealList';
 
 export default function HomeScreen() {
     const navigation = useNavigation();
+    // @ts-ignore
+    const mealList = useSelector(state => state.mealReducer.mealList);
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        const loadMeals = async () => {
+            // @ts-ignore
+            await dispatch(getMealList());
+        }
+        loadMeals();
+    }, [dispatch]);
+    
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -24,25 +34,31 @@ export default function HomeScreen() {
                     <View style={styles.MealSheetTitle}>
                         <CustomText text="Plat du jour" textType="subtitle"/>
                     </View>
-                    <TouchableOpacity 
-						onPress={() => {
-							// @ts-ignore
-							return navigation.navigate('MealDetails', {meal: meals[0]});
-						}}>
-                        <MealInformationSheet meal={meals[0]}/>
-                    </TouchableOpacity>
+                    { mealList.length != 0 ?
+                        <TouchableOpacity 
+                            onPress={() => {
+                                // @ts-ignore
+                                return navigation.navigate('MealDetails', {meal: mealList[0]});
+                            }}>
+                            <MealInformationSheet meal={mealList[0]}/>
+                        </TouchableOpacity>
+                        : ""
+                    }
                 </View>
                 <View style={styles.MealSheet}>
                     <View style={styles.MealSheetTitle}>
                         <CustomText text="Désert du jour" textType="subtitle"/>
                     </View>
-                    <TouchableOpacity 
-						onPress={() => {
-							// @ts-ignore
-							return navigation.navigate('MealDetails', {meal: meals[1]});
-						}}>
-                    <MealInformationSheet meal={meals[1]}/>
-                    </TouchableOpacity>
+                    { mealList.length != 0 ?
+                        <TouchableOpacity 
+                            onPress={() => {
+                                // @ts-ignore
+                                return navigation.navigate('MealDetails', {meal: mealList[1]});
+                            }}>
+                        <MealInformationSheet meal={mealList[1]}/>
+                        </TouchableOpacity>
+                        : ""
+                    }
                 </View>
             </View>
         </ScrollView>
