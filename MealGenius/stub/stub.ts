@@ -73,7 +73,27 @@ export function getMeals(): Meal[] {
         "easy"
     );
 
-    return [paella, spaghetti, pizza];
+    let strawberrySorbet: Meal = new Meal(
+        "4",
+        "Sorbet à la fraise",
+        "Un dessert rafraichissant pour l'été !",
+        image,
+        15,
+        [
+            new Ingredient("16", foods[11], "g", 600),
+            new Ingredient("17", foods[12], "g", 350),
+            new Ingredient("18", foods[13], "cl", 25),
+        ],
+        "dessert",
+        [
+            new Step("10", "Portez à ébullition dans une casserole le sucre et l'eau. Laissez cuire pendant 5 minutes.", 0, 5),
+            new Step("11", "Lavez et équeutez les fruits ou pelez-les. Mixez-les, versez le sirop dessus.", 5, 10),
+            new Step("12", "Versez le mélange dans une sorbetière, et mettez au congélateur jusqu'à ce que le sorbet prenne.", 5, 0),
+        ],
+        "easy"
+    );
+
+    return [paella, spaghetti, pizza, strawberrySorbet];
 };
 
 export function getFoods(): Food[] {
@@ -89,6 +109,9 @@ export function getFoods(): Food[] {
         new Food("9", "Sauce tomate"),
         new Food("10", "Champignon"),
         new Food("11", "Pâte à pizza"),
+        new Food("12", "fraises"),
+        new Food("13", "sucre"),
+        new Food("14", "eau"),
     ];
     
     return foods;
@@ -101,3 +124,7 @@ export function getUser(): User{
 }
 
 let selectedFoods: Food[] = [];
+
+export function getMealsDayStub(): {mainCourse: Meal, dessert: Meal} {
+    return {mainCourse: getMeals()[1], dessert: getMeals()[3]}
+}

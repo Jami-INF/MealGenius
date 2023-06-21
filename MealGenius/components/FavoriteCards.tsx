@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native"
 type FavoriteCardProps = {
     /** The meals to display. */
     meals: Meal[],
-    theme: Record<string, string>,
     removeFavorite: (meal: Meal) => void
 }
 
@@ -24,7 +23,7 @@ export default function FavoriteCards(props: FavoriteCardProps): JSX.Element {
                             // @ts-ignore
                             return navigation.navigate('MealDetails', {meal: item});
                         }}>
-                        <FavoriteCard meal={item} onDelete={() => props.removeFavorite(item) }  theme={props.theme} />
+                        <FavoriteCard meal={item} onDelete={() => props.removeFavorite(item) }/>
                     </TouchableOpacity>
 
 

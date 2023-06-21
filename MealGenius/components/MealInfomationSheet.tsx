@@ -5,34 +5,37 @@ import IngredientsCapsuleList from "./IngredientsCapsuleList";
 import { Meal } from "../models/Meal";
 import Time from "./Time";
 import { Surface } from 'react-native-paper';
+import { useContext } from "react";
+import { DarkThemeContext } from "../App";
 
 type MealInformationSheetProps = {
     meal: Meal,
-    theme: Record<string, string>
 }
 
 export default function MealInformationSheet(props: MealInformationSheetProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Surface style={styles(props.theme).container}>
-            <View style={styles(props.theme).header}>
-                <View style={styles(props.theme).title}>
-                    <CustomText text={props.meal.name} textType="subtitle" theme={props.theme}/>
+        <Surface style={styles(theme).container}>
+            <View style={styles(theme).header}>
+                <View style={styles(theme).title}>
+                    <CustomText text={props.meal.name} textType="subtitle"/>
                 </View>
-                <View style={styles(props.theme).clock}>
-                    <Ionicons name="time-outline" size={30} style={{color: props.theme.secondaryTextColor}}/>
-                    <Time time={props.meal.duration} fontSize={20} theme={props.theme}/>
+                <View style={styles(theme).clock}>
+                    <Ionicons name="time-outline" size={30} style={{color: theme.secondaryTextColor}}/>
+                    <Time time={props.meal.duration} fontSize={20}/>
                 </View>
             </View>
 
 
-            <Image style={styles(props.theme).image} source={{uri: props.meal.image
+            <Image style={styles(theme).image} source={{uri: props.meal.image
             }}/>
             {/* <CustomImage imageType={props.meal.image.type} imageName={props.meal.image.name} imageExtension={props.meal.image.extension}/> */}
 
-            <View style={styles(props.theme).mainText}>
-                <CustomText text={props.meal.description} textType="paragraph" theme={props.theme}/>
-                <View style={styles(props.theme).ingredients}>
-                    <IngredientsCapsuleList ingredients={props.meal.ingredients} theme={props.theme}/>
+            <View style={styles(theme).mainText}>
+                <CustomText text={props.meal.description} textType="paragraph"/>
+                <View style={styles(theme).ingredients}>
+                    <IngredientsCapsuleList ingredients={props.meal.ingredients}/>
                 </View>
             </View>
         </Surface>
