@@ -1,5 +1,4 @@
 import { ADD_FAVORITE_MEALS, DELETE_MEAL, FETCH_MEAL_LIST } from "../constants";
-import mealReducer from './mealReducer';
 
 const initialState = {
     mealList: [],
