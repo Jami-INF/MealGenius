@@ -5,11 +5,11 @@ import { Ionicons } from '@expo/vector-icons';
 import MealNavigation from "./MealNavigation";
 import PantryNavigation from "./PantryNavigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import React from "react";
+import React, { useContext } from "react";
 import FavoriteScreen from "../screens/FavoriteScreen";
+import { DarkThemeContext } from "../App";
 
 type NavigationProps = {
-    theme: Record<string, string>,
     isDarkMode: boolean,
     setIsDarkMode: Function,
     onLogout: () => void,
@@ -17,6 +17,7 @@ type NavigationProps = {
 
 export default function Navigation(props: NavigationProps) {
     const BottomTabNavigator = createBottomTabNavigator();
+    const { theme } = useContext(DarkThemeContext);
 
     return (
         <SafeAreaProvider>
@@ -24,7 +25,7 @@ export default function Navigation(props: NavigationProps) {
                 <BottomTabNavigator.Navigator 
                     initialRouteName="Home">
 
-                    <BottomTabNavigator.Screen name="Home" component={() => <MealNavigation theme={props.theme}/>}
+                    <BottomTabNavigator.Screen name="Home" component={MealNavigation}
                         options={{
                                 headerShown: false,
                                 tabBarIcon: ({ focused, color, size }) => (
@@ -36,7 +37,7 @@ export default function Navigation(props: NavigationProps) {
                                 ),
                                 title: "Menu",
                         }}/>
-                    <BottomTabNavigator.Screen name="Pantry" component={() => <PantryNavigation theme={props.theme}/>}
+                    <BottomTabNavigator.Screen name="Pantry" component={PantryNavigation}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({ focused, color, size }) => (
@@ -48,7 +49,7 @@ export default function Navigation(props: NavigationProps) {
                             ),
                             title: "Garde-manger"
                         }}/>
-                    <BottomTabNavigator.Screen name="Favorite" component={() => <FavoriteScreen theme={props.theme}/>}
+                    <BottomTabNavigator.Screen name="Favorite" component={FavoriteScreen}
                         options={{
                             title: 'Favoris',
                             tabBarIcon: ({ focused, color, size }) => (
@@ -63,7 +64,7 @@ export default function Navigation(props: NavigationProps) {
                                 fontSize: 32,
                             },
                         }}/>
-                    <BottomTabNavigator.Screen name="Settings" component={() => <SettingsScreen theme={props.theme} isDarkTheme={props.isDarkMode} setDarkTheme={props.setIsDarkMode} handleLogout={props.onLogout}/>}
+                    <BottomTabNavigator.Screen name="Settings" component={() => <SettingsScreen handleLogout={props.onLogout}/>}
                        options={{
                             title: 'Paramètres',
                             tabBarIcon: ({ focused, color, size }) => (

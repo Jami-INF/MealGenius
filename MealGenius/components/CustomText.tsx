@@ -1,5 +1,7 @@
 import { Text, StyleSheet } from "react-native";
 import { ThemeProvider } from "react-native-paper";
+import { DarkThemeContext } from "../App";
+import { useContext } from "react";
 
 type TextType = "title" | "subtitle" | "paragraph" | "card";
 type ellipsizeMode = "tail" | "head" | "middle" | "clip";
@@ -9,7 +11,6 @@ type TextProps = {
     textType: TextType,
     ellipsizeMode?: ellipsizeMode,
     numberofLines?: number,
-    theme: Record<string, string>,
 }
 
 /** Display a text with a specific style.
@@ -17,8 +18,10 @@ type TextProps = {
  *  the number of lines and the ellipsize mode (`tail` | `head` | `middle` | `clip`).
  */
 export default function CustomText(props: TextProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Text style={getStyle(props.textType, props.theme)} 
+        <Text style={getStyle(props.textType, theme)} 
             numberOfLines={props.numberofLines} 
             ellipsizeMode={props.ellipsizeMode}>
             {props.text}

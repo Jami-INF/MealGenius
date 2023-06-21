@@ -1,16 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
 import PantryScreen from "../screens/PantryScreen";
+import { useContext } from "react";
+import { DarkThemeContext } from "../App";
 
-interface PantryNavigationProps {
-    theme: Record<string, string>,
-}
-export default function PantryNavigation(props: PantryNavigationProps): JSX.Element {
+export default function PantryNavigation(): JSX.Element {
     const Stack = createStackNavigator();
 
     return (
         <Stack.Navigator initialRouteName="PantryList">
-            <Stack.Screen name="PantryList" component={() => <PantryScreen theme={props.theme} />} 
+            <Stack.Screen name="PantryList" component={PantryScreen} 
                 options={{
                     title: "Garde-manger",
                     headerTitleStyle: {
@@ -20,10 +19,8 @@ export default function PantryNavigation(props: PantryNavigationProps): JSX.Elem
                 }}/>
             <Stack.Screen 
                 name="PantryDetails"
-                component={(prop) => <MealDetailsScreen {...prop} route={prop.route} theme={props.theme} />}
+                component={MealDetailsScreen}
                 options={({ route }) => ({
-                    // @ts-ignore
-                    //title: route?.params?.meal?.name || "Détails", 
                     headerShown: false
                 })}
                     />
