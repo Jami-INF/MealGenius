@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import Navigation from './navigation/Navigation';
 import { Provider } from 'react-redux';
@@ -7,6 +7,8 @@ import { darkTheme, lightTheme } from './theme/theme';
 import { Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from "./components/Login/Login";
+
+export const DarkThemeContext = createContext(null);
 
 export default function App() {
   const [isDarkTheme, setDarkTheme] = useState(false);
@@ -55,18 +57,20 @@ export default function App() {
   };
   return (
       <Provider store={store}>
-      <SafeAreaView style={[styles.topSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}/>
-        <SafeAreaView style={[styles.mainSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}>
-          {isLoggedIn ? (
-              <PaperProvider>
-          <Navigation theme={theme} isDarkMode={isDarkTheme} setIsDarkMode={setDarkTheme} onLogout={handleLogout} />
-            </PaperProvider>
-          ) : (
-              <View style={styles.container}>
-                <Login onLoginSuccess={handleLoginSuccess} />
-              </View>
-          )}
-        </SafeAreaView>
+        <DarkThemeContext.Provider value={{theme, isDarkTheme, setDarkTheme}}>
+          <SafeAreaView style={[styles.topSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}/>
+          <SafeAreaView style={[styles.mainSafeArea, {backgroundColor: theme.navigationBackgroundColor}]}>
+            {isLoggedIn ? (
+                <PaperProvider>
+            <Navigation isDarkMode={isDarkTheme} setIsDarkMode={setDarkTheme} onLogout={handleLogout} />
+              </PaperProvider>
+            ) : (
+                <View style={styles.container}>
+                  <Login onLoginSuccess={handleLoginSuccess} />
+                </View>
+            )}
+          </SafeAreaView>
+        </DarkThemeContext.Provider>
       </Provider>
   );
 }
