@@ -4,20 +4,30 @@ import CustomText from '../components/CustomText';
 import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import IngredientAddModal from "../components/IngredientAddModal";
 import { Food } from "../models/Food";
 import IngredientsModal from "../components/IngredientsModal";
 import { ScrollView } from "react-native-gesture-handler";
 import { DarkThemeContext } from "../App";
-
-const meals: Meal[] = getMeals();
-const foods: Food[] = getFoods();
+import { useDispatch, useSelector } from "react-redux";
+import { getMealList } from "../redux/actions/actionMealList";
 
 export default function PantryScreen(): JSX.Element {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isIngredientsModalVisible, setIngredientsModalVisible] = useState(false);
     const { theme } = useContext(DarkThemeContext);
+    // @ts-ignore
+    const mealList = useSelector(state => state.mealReducer.mealList);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        const loadMeals = async () => {
+            // @ts-ignore
+            await dispatch(getMealList());
+        }
+        loadMeals();
+    }, [dispatch]);
 
     const openModal = () => {
       setModalVisible(true);
@@ -64,7 +74,7 @@ export default function PantryScreen(): JSX.Element {
                         <CustomText text="Mes entrées" textType="subtitle"/>
                     </View>
                     <View>
-                        <MealCards meals={meals.filter((meal: Meal) => meal.type === "starter")}/>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "starter")}/>
                     </View>
                 </View>
                 <View style={styles(theme).mealTypeContainer}>
@@ -72,7 +82,7 @@ export default function PantryScreen(): JSX.Element {
                         <CustomText text="Mes plats" textType="subtitle"/>
                     </View>
                     <View>
-                        <MealCards meals={meals.filter((meal: Meal) => meal.type === "main course")}/>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "main course")}/>
                     </View>
                 </View>
                 <View style={styles(theme).mealTypeContainer}>
@@ -80,7 +90,7 @@ export default function PantryScreen(): JSX.Element {
                         <CustomText text="Mes desserts" textType="subtitle"/>
                     </View>
                     <View>
-                        <MealCards meals={meals.filter((meal: Meal) => meal.type === "dessert")}/>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "dessert")}/>
                     </View>
                 </View>
             </ScrollView>
