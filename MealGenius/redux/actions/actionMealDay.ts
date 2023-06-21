@@ -1,6 +1,7 @@
 import { Meal } from "../../models/Meal";
 import { FETCH_MEAL_DAY, URL_API } from "../constants";
 import { getMealsDayStub } from "../../stub/stub";
+
 export type MealsDay = {
     mainCourse: Meal,
     dessert: Meal,

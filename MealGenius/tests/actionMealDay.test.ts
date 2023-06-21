@@ -1,4 +1,3 @@
-import { Meal } from "../models/Meal";
 import { MealsDay, getMealsDay, setMealsDay } from "../redux/actions/actionMealDay";
 import { FETCH_MEAL_DAY } from "../redux/constants";
 import { getMeals } from "../stub/stub";
