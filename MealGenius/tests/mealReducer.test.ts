@@ -4,21 +4,28 @@ import mealReducer from "../redux/reducers/mealReducer";
 import { getMeals } from "../stub/stub";
 
 describe("Meal Reducer", () => {
-
     const initialState = {
         mealList: [],
-        mealsDay: {
-            mainCourse: {},
-            dessert: {},
-        }
-    };
+        mealsDay: {},
+        favoritesMealList: [],
+    }
 
-    it.skip("should return the initial state", () => {
-
-        expect(mealReducer(undefined, {})).toEqual(initialState);
+    it("should return the initial state", () => {
+        var a = mealReducer(undefined, {});
+        console.log(a);
+        console.log(initialState);
+        expect(a).toEqual(initialState);
     })
 
     describe("Meal Reducer - FETCH_MEAL_LIST", () => {
+        const initialState = {
+            mealList: [],
+            mealsDay: {
+                mainCourse: {},
+                dessert: {},
+            }
+        };
+
         // Mock meal data
         const meals: Meal[] = getMeals();
         
@@ -30,7 +37,7 @@ describe("Meal Reducer", () => {
 
         it("should handle FETCH_MEAL_LIST", () => {    
             expect(
-                mealReducer(initialState, expectation)
+                mealReducer(initialState)
             ).toEqual({
                 mealList: meals,
                 mealsDay: {
@@ -38,6 +45,33 @@ describe("Meal Reducer", () => {
                     dessert: {}
                 },
             });
+        }
+    )})
+
+    describe("Meal Reducer - FETCH_MEAL_DAY", () => {
+        const initialState = {
+            mealList: [],
+            mealsDay: {
+                mainCourse: {},
+                dessert: {},
+            }
+        };
+
+        // Mock mealDay data
+        
+        // Expected action
+        const expectation = {
+            mealList: [],
+                mealsDay: {
+                    mainCourse: getMeals()[4],
+                    dessert: getMeals()[2]
+                },
+        };
+
+        it("should handle FETCH_MEAL_LIST", () => {    
+            var a = mealReducer(initialState);
+            console.log(a,);
+            expect(a).toEqual(expectation);
         }
     )})
 })
