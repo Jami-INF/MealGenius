@@ -17,7 +17,8 @@
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
     ],
     "testMatch": [
-      "**.test.ts"
+      "**.test.ts",
+      "**.test.js"
     ],
     "testEnvironment": "node",
     "testEnvironmentOptions": {
@@ -39,6 +40,7 @@
     "@react-navigation/stack": "^6.3.16",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-native": "^5.4.2",
+    "@testing-library/react-native": "^12.1.2",
     "@types/react": "~18.0.27",
     "expo": "~48.0.15",
     "expo-status-bar": "~1.4.4",
