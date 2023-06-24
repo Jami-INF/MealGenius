@@ -1,5 +1,5 @@
 import { Meal } from "../models/Meal";
-import { FETCH_MEAL_LIST } from "../redux/constants";
+import { FETCH_MEAL_DAY, FETCH_MEAL_LIST } from "../redux/constants";
 import mealReducer from "../redux/reducers/mealReducer";
 import { getMeals } from "../stub/stub";
 
@@ -37,7 +37,7 @@ describe("Meal Reducer", () => {
 
         it("should handle FETCH_MEAL_LIST", () => {    
             expect(
-                mealReducer(initialState)
+                mealReducer(initialState, expectation)
             ).toEqual({
                 mealList: meals,
                 mealsDay: {
@@ -58,20 +58,24 @@ describe("Meal Reducer", () => {
         };
 
         // Mock mealDay data
-        
-        // Expected action
         const expectation = {
-            mealList: [],
-                mealsDay: {
-                    mainCourse: getMeals()[4],
-                    dessert: getMeals()[2]
-                },
+            type: FETCH_MEAL_DAY,
+            payload: {
+                        mainCourse: getMeals()[4],
+                        dessert: getMeals()[2]
+                    }
         };
 
         it("should handle FETCH_MEAL_LIST", () => {    
-            var a = mealReducer(initialState);
+            var a = mealReducer(initialState, expectation);
             console.log(a,);
-            expect(a).toEqual(expectation);
+            expect(a).toEqual({
+                mealList: [],
+                mealsDay: {
+                    mainCourse: getMeals()[4],
+                    dessert: getMeals()[2]
+                }
+            });
         }
     )})
 })
