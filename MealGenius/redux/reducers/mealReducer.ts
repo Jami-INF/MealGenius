@@ -12,7 +12,6 @@ const initialState = {
 export default mealReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MEAL_LIST:
-      // @ts-ignore
       return {...state, mealList: action.payload};
     case FETCH_MEAL_DAY:
       return {...state, mealsDay: action.payload};

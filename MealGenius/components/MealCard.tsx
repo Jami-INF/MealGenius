@@ -1,5 +1,5 @@
 import { Meal } from "../models/Meal"
-import { View, StyleSheet, Image } from "react-native"
+import { View, StyleSheet, Image, Text } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
@@ -19,13 +19,13 @@ export default function MealCard(props: MealCardProps): JSX.Element {
 
     return (
         <Surface style={styles(theme).card}>
-            <Image style={styles(theme).image} source={{uri: props.meal.image}}/>
+            <Image testID="meal-image" style={styles(theme).image} source={{uri: props.meal.image}}/>
             <View style={styles(theme).header}>
                 <View style={styles(theme).title}>
-                    <CustomText text={props.meal.name}
-                        textType="subtitle"
+                    <Text testID="meal-name"
                         ellipsizeMode="tail"
-                        numberofLines={1}/>
+                        numberOfLines={1}
+                        style={styles(theme).subtitle}/>
                 </View>
                 <View style={styles(theme).clock}>
                     <Ionicons name="time-outline" size={30} style={{color: theme.secondaryTextColor}}/>
@@ -47,6 +47,11 @@ const styles = (theme) => StyleSheet.create({
     title: {
         flex: 1,
         marginHorizontal: 10
+    },
+    subtitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        color: theme.textColor
     },
     header: {
         justifyContent: "space-between",
