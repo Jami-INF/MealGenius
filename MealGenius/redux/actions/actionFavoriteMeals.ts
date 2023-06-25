@@ -1,9 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Meal } from '../../models/Meal';
 import { ADD_FAVORITE_MEAL, LOAD_FAVORITE_MEALS, REMOVE_FAVORITE_MEAL } from '../constants';
-import { Ingredient } from '../../models/Ingredient';
-import { Food } from '../../models/Food';
-import { Step } from '../../models/Step';
+import { Mapper } from '../../models/Mapper';
 
 export const addFavoriteMeal = (meal: Meal) => {
     return async dispatch => {
@@ -65,33 +63,7 @@ async function getFavoriteMeals(): Promise<Meal[]> {
         }
 
         const jsonFavorites = JSON.parse(favoritesStorage);
-        const favoriteMealsList = jsonFavorites.map(elt => new Meal(
-            elt._id,
-            elt._name,
-            elt._description,
-            elt._image,
-            elt._duration,
-            elt._ingredients.map(ingredient => new Ingredient(
-                    ingredient._id,
-                    new Food(
-                        ingredient._food._id,
-                        ingredient._food._name
-                    ),
-                    ingredient._unit,
-                    ingredient._quantity,
-                )
-            ),
-            elt._type,
-            elt._steps.map(step => new Step(
-                    step._id,
-                    step._description,
-                    step._number,
-                    step._duration
-                )
-            ),
-            elt._complexity
-            )
-        );
+        const favoriteMealsList = jsonFavorites.map(elt => Mapper.mealFromJson(elt));
         return favoriteMealsList;
     } catch (e) {
         console.log("An error occurred", e);

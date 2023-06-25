@@ -22,10 +22,10 @@ export default function MealCard(props: MealCardProps): JSX.Element {
             <Image testID="meal-image" style={styles(theme).image} source={{uri: props.meal.image}}/>
             <View style={styles(theme).header}>
                 <View style={styles(theme).title}>
-                    <Text testID="meal-name"
+                    <CustomText text={props.meal.name}
+                        textType="subtitle"
                         ellipsizeMode="tail"
-                        numberOfLines={1}
-                        style={styles(theme).subtitle}/>
+                        numberofLines={1}/>
                 </View>
                 <View style={styles(theme).clock}>
                     <Ionicons name="time-outline" size={30} style={{color: theme.secondaryTextColor}}/>

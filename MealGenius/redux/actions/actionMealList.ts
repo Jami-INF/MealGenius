@@ -1,3 +1,4 @@
+import { Mapper } from "../../models/Mapper";
 import { Meal } from "../../models/Meal";
 import { getMeals } from "../../stub/stub";
 import { FETCH_MEAL_LIST, URL_API } from "../constants";
@@ -19,18 +20,7 @@ export const getMealList = () => {
         }
         const mealListJson = await mealPromise.json();
 
-        mealList = mealListJson.map(elt => new Meal(
-            elt["id"],
-            elt["name"],
-            elt["description"],
-            elt["image"],
-            elt["duration"],
-            elt["ingredients"],
-            elt["type"],
-            elt["steps"],
-            elt["complexity"]
-          )
-        );
+        mealList = mealListJson.map(elt => Mapper.mealFromJson(elt));
       } catch (error) {
         console.log('Error (cannot build meal list from json) : ', error);
       } finally {

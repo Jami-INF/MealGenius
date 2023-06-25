@@ -13,6 +13,7 @@ import { useRoute } from "@react-navigation/native";
 import { DarkThemeContext } from "../App";
 import { useDispatch } from "react-redux";
 import { addFavoriteMeal, removeFavoriteMeal } from "../redux/actions/actionFavoriteMeals";
+import { Mapper } from "../models/Mapper";
 
 export default function MealDetailsScreen(): JSX.Element  {
     const route = useRoute();
@@ -34,7 +35,7 @@ export default function MealDetailsScreen(): JSX.Element  {
                 const jsonFavorites = JSON.parse(jsonFavorite)
                 const favorites: Meal[] = [];
                 for (let i = 0; i < jsonFavorites.length; i++) {
-                    let m: Meal = new Meal(jsonFavorites[i]._id, jsonFavorites[i]._name, jsonFavorites[i]._description, jsonFavorites[i]._image, jsonFavorites[i]._duration, jsonFavorites[i]._ingredients, jsonFavorites[i]._type, jsonFavorites[i]._steps, jsonFavorites[i]._complexity);
+                    let m: Meal = Mapper.mealFromJson(jsonFavorites[i]);
                     favorites.push(m);
                 }
                 return favorites;
