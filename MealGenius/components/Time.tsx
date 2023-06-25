@@ -22,7 +22,7 @@ export default function Time(props: TimeProps): JSX.Element {
     const { theme } = useContext(DarkThemeContext);
 
     return (
-        <Text style={{fontSize: props.fontSize, color: theme.secondaryTextColor}}>{getTimeText(props.time)}</Text>
+        <Text testID="time" style={{fontSize: props.fontSize, color: theme.secondaryTextColor}}>{getTimeText(props.time)}</Text>
     )
 }
 

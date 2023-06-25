@@ -21,10 +21,10 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
             <View style={styles(theme).main}>
                 <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={props.onDelete}/>}>
                     <Surface style={styles(theme).card} mode={"flat"}>
-                        <Image testID="meal-image" style={styles(theme).image} source={{uri: props.meal.image}}/>
+                        <Image style={styles(theme).image} source={{uri: props.meal.image}}/>
                         <View style={styles(theme).content}>
-                            <Text testID="meal-name" numberOfLines={1} style={styles(theme).name}>{props.meal.name}</Text>
-                            <Text testID="meal-description" numberOfLines={2} style={{color: theme.secondaryTextColor}}>{props.meal.description}</Text>
+                            <Text numberOfLines={1} style={styles(theme).name}>{props.meal.name}</Text>
+                            <Text numberOfLines={2} style={{color: theme.secondaryTextColor}}>{props.meal.description}</Text>
                             <View style={styles(theme).duration}>
                                 <Ionicons name="time-outline" size={20} style={{color: theme.secondaryTextColor}}/>
                                 <Time time={props.meal.duration} fontSize={15}/>
