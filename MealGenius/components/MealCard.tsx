@@ -1,30 +1,34 @@
 import { Meal } from "../models/Meal"
-import { View, StyleSheet, Image } from "react-native"
+import { View, StyleSheet, Image, Text } from "react-native"
 import CustomText from "./CustomText"
 import { Ionicons } from "@expo/vector-icons"
 import Time from "./Time"
 import { Surface } from 'react-native-paper';
+import { useContext } from "react"
+import { DarkThemeContext } from "../App"
 
 type MealCardProps = {
-    meal: Meal
+    meal: Meal,
 }
 
 /** Get a card with the meal's name, image, and duration
  * @param props The meal to display
  */
 export default function MealCard(props: MealCardProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Surface style={styles.card}>
-            <Image style={styles.image} source={{uri: props.meal.image}}/>
-            <View style={styles.header}>
-                <View style={styles.title}>
+        <Surface style={styles(theme).card}>
+            <Image testID="meal-image" style={styles(theme).image} source={{uri: props.meal.image}}/>
+            <View style={styles(theme).header}>
+                <View style={styles(theme).title}>
                     <CustomText text={props.meal.name}
-                        textType="card"
+                        textType="subtitle"
                         ellipsizeMode="tail"
-                        numebrofLines={1}/>
+                        numberofLines={1}/>
                 </View>
-                <View style={styles.clock}>
-                    <Ionicons name="time-outline" size={30}/>
+                <View style={styles(theme).clock}>
+                    <Ionicons name="time-outline" size={30} style={{color: theme.secondaryTextColor}}/>
                     <Time time={props.meal.duration} fontSize={20}/>
                 </View>
             </View>
@@ -32,16 +36,22 @@ export default function MealCard(props: MealCardProps): JSX.Element {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     card: {
         width: 300,
         borderRadius: 20,
         marginHorizontal: 3,
-        marginVertical: 3
+        marginVertical: 3,
+        backgroundColor: theme.surfaceColor
     },
     title: {
         flex: 1,
         marginHorizontal: 10
+    },
+    subtitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        color: theme.textColor
     },
     header: {
         justifyContent: "space-between",

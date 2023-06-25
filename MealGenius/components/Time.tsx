@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { Text } from "react-native";
+import { DarkThemeContext } from "../App";
 
 type TimeProps = {
     time: number,
-    fontSize?: number
+    fontSize?: number,
 }
 
 /** Transform the time in minutes to a string.
@@ -17,8 +19,10 @@ type TimeProps = {
  * <Time time={122}/> => "2 h 2 min"
  */
 export default function Time(props: TimeProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Text style={{fontSize: props.fontSize}}>{getTimeText(props.time)}</Text>
+        <Text testID="time" style={{fontSize: props.fontSize, color: theme.secondaryTextColor}}>{getTimeText(props.time)}</Text>
     )
 }
 

@@ -1,20 +1,33 @@
-import { View, StyleSheet } from "react-native";
-import CustomText from "../components/CustomText";
-import { Button, FAB, IconButton } from "react-native-paper";
+import { Button, IconButton } from "react-native-paper";
+import { View, StyleSheet, Text } from "react-native";
+import CustomText from '../components/CustomText';
 import { Meal } from "../models/Meal";
 import { getFoods, getMeals } from "../stub/stub";
 import MealCards from "../components/MealCards";
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import IngredientAddModal from "../components/IngredientAddModal";
 import { Food } from "../models/Food";
 import IngredientsModal from "../components/IngredientsModal";
+import { ScrollView } from "react-native-gesture-handler";
+import { DarkThemeContext } from "../App";
+import { useDispatch, useSelector } from "react-redux";
+import { getMealList } from "../redux/actions/actionMealList";
 
-const meals: Meal[] = getMeals();
-const foods: Food[] = getFoods();
-
-export default function PantryScreen() {
+export default function PantryScreen(): JSX.Element {
     const [isModalVisible, setModalVisible] = useState(false);
     const [isIngredientsModalVisible, setIngredientsModalVisible] = useState(false);
+    const { theme } = useContext(DarkThemeContext);
+    // @ts-ignore
+    const mealList = useSelector(state => state.mealReducer.mealList);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        const loadMeals = async () => {
+            // @ts-ignore
+            await dispatch(getMealList());
+        }
+        loadMeals();
+    }, [dispatch]);
 
     const openModal = () => {
       setModalVisible(true);
@@ -42,12 +55,8 @@ export default function PantryScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.centered}>
-                <CustomText text="Garde-manger" textType="title"/>
-            </View>
-            <View style={styles.buttonContainer}>
-                
+        <View style={styles(theme).container}>
+            <View style={styles(theme).buttonContainer}>
                 <Button icon="fridge" 
                     mode="contained-tonal" 
                     onPress={openIngredientsModal}>
@@ -58,21 +67,43 @@ export default function PantryScreen() {
                             size={20}
                             mode="contained-tonal" 
                             onPress={openModal}/>
-
             </View>
-            <View>
-                <MealCards meals={meals}/>
-            </View>
+            <ScrollView>
+                <View style={styles(theme).mealTypeContainer}>
+                    <View style={styles(theme).mealTypeText}>
+                        <CustomText text="Mes entrées" textType="subtitle"/>
+                    </View>
+                    <View>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "starter")}/>
+                    </View>
+                </View>
+                <View style={styles(theme).mealTypeContainer}>
+                    <View style={styles(theme).mealTypeText}>
+                        <CustomText text="Mes plats" textType="subtitle"/>
+                    </View>
+                    <View>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "main course")}/>
+                    </View>
+                </View>
+                <View style={styles(theme).mealTypeContainer}>
+                    <View style={styles(theme).mealTypeText}>
+                        <CustomText text="Mes desserts" textType="subtitle"/>
+                    </View>
+                    <View>
+                        <MealCards meals={mealList.filter((meal: Meal) => meal.type === "dessert")}/>
+                    </View>
+                </View>
+            </ScrollView>
             <IngredientAddModal visible={isModalVisible} onRequestClose={closeModal} onRequestValidate={validateModal}/>
             <IngredientsModal visible={isIngredientsModalVisible} onRequestClose={closeIngrediensModal} onRequestValidate={validateIngredientsModal}/>
         </View>
     )
 };
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.backgroundColor,
     },
     centered: {
         alignItems: "center"
@@ -85,5 +116,12 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         margin: 20,
         alignItems: "center"
+    },
+    mealTypeContainer: {
+        marginBottom: 25,
+        minHeight: 100,
+    },
+    mealTypeText: {
+        marginLeft: 10
     }
 });

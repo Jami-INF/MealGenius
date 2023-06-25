@@ -26,9 +26,9 @@ export function getMeals(): Meal[] {
         ],
         "main course",
         [
-            new Step("1", "Boil water", 5, 30),
-            new Step("2", "Cook pasta", 5, 30),
-            new Step("3", "Serve", 5, 30),
+            new Step("1", "Découper le poulet en morceaux, nettoyer les moules, émincer le chorizo et les poivrons, peler et concasser les tomates, hacher les oignons et l'ail.", 5, 10),
+            new Step("2", "Mettre l'huile dans le plat et faire dorer les morceaux de poulet. Ajouter les calamars, les oignons tout en remuant puis mettre les tomates, les poivrons, l'ail, le safran, le sel et le poivre. Laisser cuire 5 minutes en remuant avant d'incorporer le riz, le chorizo et le bouillon.", 5, 70),
+            new Step("3", "Y plonger les crevettes et les moules, porter à ébullition puis laisser cuire environ 30-35 minutes.", 5, 30),
         ],
             "easy"
      );
@@ -73,7 +73,27 @@ export function getMeals(): Meal[] {
         "easy"
     );
 
-    return [paella, spaghetti, pizza];
+    let strawberrySorbet: Meal = new Meal(
+        "4",
+        "Sorbet à la fraise",
+        "Un dessert rafraichissant pour l'été !",
+        image,
+        15,
+        [
+            new Ingredient("16", foods[11], "g", 600),
+            new Ingredient("17", foods[12], "g", 350),
+            new Ingredient("18", foods[13], "cl", 25),
+        ],
+        "dessert",
+        [
+            new Step("10", "Portez à ébullition dans une casserole le sucre et l'eau. Laissez cuire pendant 5 minutes.", 0, 5),
+            new Step("11", "Lavez et équeutez les fruits ou pelez-les. Mixez-les, versez le sirop dessus.", 5, 10),
+            new Step("12", "Versez le mélange dans une sorbetière, et mettez au congélateur jusqu'à ce que le sorbet prenne.", 5, 0),
+        ],
+        "easy"
+    );
+
+    return [paella, spaghetti, pizza, strawberrySorbet];
 };
 
 export function getFoods(): Food[] {
@@ -89,6 +109,9 @@ export function getFoods(): Food[] {
         new Food("9", "Sauce tomate"),
         new Food("10", "Champignon"),
         new Food("11", "Pâte à pizza"),
+        new Food("12", "fraises"),
+        new Food("13", "sucre"),
+        new Food("14", "eau"),
     ];
     
     return foods;
@@ -101,3 +124,7 @@ export function getUser(): User{
 }
 
 let selectedFoods: Food[] = [];
+
+export function getMealsDayStub(): {mainCourse: Meal, dessert: Meal} {
+    return {mainCourse: getMeals()[1], dessert: getMeals()[3]}
+}

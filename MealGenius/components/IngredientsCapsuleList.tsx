@@ -3,7 +3,7 @@ import IngredientCapsule from "./IngredientCapsule";
 import { Ingredient } from "../models/Ingredient";
 
 type IngredientsCapsuleListProps = {
-    ingredients: Ingredient[]
+    ingredients: Ingredient[],
 }
 
 export default function IngredientsCapsuleList(props: IngredientsCapsuleListProps): JSX.Element {
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     ingredients: {
         flex: 1,
         flexDirection: "row",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     ingredientView: {
         marginHorizontal: 5,
-        marginVertical: 2.5
+        marginVertical: 2.5,
     }
 });

@@ -10,7 +10,7 @@ export default function BackButton(): JSX.Element {
             <IconButton icon={"arrow-left"}
                     size={30} 
                     iconColor="black"
-                    containerColor="white"
+                    mode="contained-tonal"
                     onPress={() => navigation.goBack()}
                     style={styles.backButton}/>
         </Portal>

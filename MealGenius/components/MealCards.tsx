@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 
 type MealCardsProps = {
     /** The meals to display. */
-    meals: Meal[]
+    meals: Meal[],
 }
 
 /** Get a list of cards with the meals' names, images, and durations.

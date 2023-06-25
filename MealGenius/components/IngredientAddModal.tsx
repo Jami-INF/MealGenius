@@ -4,31 +4,35 @@ import SearchBar from "./SearchBar";
 import { FlatList } from "react-native-gesture-handler";
 import { getFoods } from "../stub/stub";
 import { Food } from "../models/Food";
+import { DarkThemeContext } from "../App";
+import { useContext } from "react";
 
 type IngredientAddModalProps = {
     visible:boolean,
     onRequestClose: () => void,
-    onRequestValidate: () => void
+    onRequestValidate: () => void,
 }
 
 let ingredientsSearched: Food[] = getFoods();
 
 export default function IngredientAddModal(props: IngredientAddModalProps): JSX.Element {
+    const { theme } = useContext(DarkThemeContext);
+
     return (
-        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles.modal}>
+        <Modal visible={props.visible} onDismiss={props.onRequestClose} contentContainerStyle={styles(theme).modal}>
             <View>
-                <View style={styles.header}>
-                    <View style={styles.searchBar}>
+                <View style={styles(theme).header}>
+                    <View style={styles(theme).searchBar}>
                         <SearchBar placeholder={"Rechercher un ingrédient"} 
                             onChangeText={function (text: string): void {
                                 console.log(text);
                             }}/>
                     </View>
-                    <View style={styles.fabButton}>
+                    <View style={styles(theme).fabButton}>
                     <IconButton icon="close"
                             size={25}
                             mode="contained-tonal"
-                            style={styles.closeButton}
+                            style={styles(theme).closeButton}
                             onPress={props.onRequestClose}/>
                     </View>
                     
@@ -37,29 +41,29 @@ export default function IngredientAddModal(props: IngredientAddModalProps): JSX.
                     <FlatList data={ingredientsSearched} 
                         renderItem={({item}) => 
                         <View>
-                            <View style={styles.food}>
-                                <Text>{item.name}</Text>
+                            <View style={styles(theme).food}>
+                                <Text style={styles(theme).itemName}>{item.name}</Text>
                                 <IconButton icon="plus"
                                             size={20}
                                             mode="contained-tonal"
-                                            style={styles.deleteButton}
+                                            style={styles(theme).deleteButton}
                                             onPress={() => console.log(`delete `)}/>
                             </View>
                             <Divider />
                         </View>}
                         keyExtractor={(item) => item.id.toString()}
-                        style={styles.FlatList}
+                        style={styles(theme).FlatList}
                     />
-                    <Button style={styles.Validate} onPress={() => props.onRequestValidate} mode="contained">Valider</Button>
+                    <Button style={styles(theme).Validate} onPress={() => props.onRequestValidate} mode="contained">Valider</Button>
                 </View>
             </View>
         </Modal>
     )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     modal: {
-        backgroundColor: "white",
+        backgroundColor: theme.surfaceColor,
         margin: 20,
         height: "90%",
         borderRadius: 20,
@@ -98,5 +102,8 @@ const styles = StyleSheet.create({
     },
     Validate: {
         marginTop: 10
+    },
+    itemName: {
+        color: theme.textColor
     }
 });

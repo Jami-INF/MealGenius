@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
 
-export default function MealNavigation() {
+export default function MealNavigation(): JSX.Element {
     const Stack = createStackNavigator();
 
     return (
@@ -19,8 +19,6 @@ export default function MealNavigation() {
                 name="MealDetails"
                 component={MealDetailsScreen}
                 options={({ route }) => ({
-                    // @ts-ignore
-                    // title: route?.params?.meal?.name || "Détails", 
                     headerShown: false
                 })}
                     />
