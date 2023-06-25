@@ -1,4 +1,4 @@
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet, Keyboard} from "react-native";
 import CustomText from "../components/CustomText";
 import { Button, Switch, TextInput } from "react-native-paper";
 import React, {useContext, useEffect, useState} from "react";
@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
 import { DarkThemeContext } from "../App";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 interface SettingsScreenProps {
     handleLogout: () => void;
@@ -29,53 +30,55 @@ export default function SettingsScreen(props: SettingsScreenProps): JSX.Element 
 
     return (
         <View style={styles(theme).container}>
-            <View style={styles(theme).centered}>
-                <View style={styles(theme).accountSubtitle}>
-                    <CustomText text={"Compte"} textType={"subtitle"}/>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles(theme).centered}>
+                    <View style={styles(theme).accountSubtitle}>
+                        <CustomText text={"Compte"} textType={"subtitle"}/>
+                    </View>
+                    <View style={styles(theme).settingUpdate}>
+                        <TextInput label={"Prénom"} 
+                            value={""}
+                            mode={"outlined"}
+                            onChangeText={text => {}}
+                            style={styles(theme).textInput}/>
+
+                        <TextInput label={"Nom"}
+                            value={""}
+                            mode={"outlined"}
+                            onChangeText={text => {}}
+                            style={styles(theme).textInput}/>
+
+                        <TextInput label={"Courriel"}
+                            value={""}
+                            mode={"outlined"}
+                            onChangeText={text => {}}
+                            style={styles(theme).textInput}/>
+
+                        <TextInput label={"Mot de passe"}
+                            value={""}
+                            mode={"outlined"}
+                            onChangeText={text => {}}
+                            style={styles(theme).textInput}/>
+
+                        <TextInput label={"Confirmation du mot de passe"}
+                            value={""}
+                            mode={"outlined"}
+                            onChangeText={text => {}}
+                            style={styles(theme).textInput}/>
+
+                        <Button children={"Valider"} mode="contained-tonal" onPress={() => {}} style={styles(theme).validateButton}/>
+                    </View>
+                    <View style={styles(theme).theme}>
+                        <CustomText text={"Thème"} textType={"subtitle"}/>
+                        <View style={styles(theme).switch}>
+                        <Ionicons name="sunny-outline" size={30} style={{color: theme.secondaryTextColor}}/>
+                        <Switch value={isDarkTheme} onValueChange={onToggleSwitch} />
+                        <Ionicons name="moon-outline" size={30} style={{color: theme.secondaryTextColor}}/>
+                    </View>
+                    </View>
+
                 </View>
-                <View style={styles(theme).settingUpdate}>
-                    <TextInput label={"Prénom"} 
-                        value={""}
-                        mode={"outlined"}
-                        onChangeText={text => {}}
-                        style={styles(theme).textInput}/>
-
-                    <TextInput label={"Nom"}
-                        value={""}
-                        mode={"outlined"}
-                        onChangeText={text => {}}
-                        style={styles(theme).textInput}/>
-
-                    <TextInput label={"Courriel"}
-                        value={""}
-                        mode={"outlined"}
-                        onChangeText={text => {}}
-                        style={styles(theme).textInput}/>
-
-                    <TextInput label={"Mot de passe"}
-                        value={""}
-                        mode={"outlined"}
-                        onChangeText={text => {}}
-                        style={styles(theme).textInput}/>
-
-                    <TextInput label={"Confirmation du mot de passe"}
-                        value={""}
-                        mode={"outlined"}
-                        onChangeText={text => {}}
-                        style={styles(theme).textInput}/>
-
-                    <Button children={"Valider"} mode="contained-tonal" onPress={() => {}} style={styles(theme).validateButton}/>
-                </View>
-                <View style={styles(theme).theme}>
-                    <CustomText text={"Thème"} textType={"subtitle"}/>
-                    <View style={styles(theme).switch}>
-                    <Ionicons name="sunny-outline" size={30} style={{color: theme.secondaryTextColor}}/>
-                    <Switch value={isDarkTheme} onValueChange={onToggleSwitch} />
-                    <Ionicons name="moon-outline" size={30} style={{color: theme.secondaryTextColor}}/>
-                </View>
-                </View>
-
-            </View>
+            </TouchableWithoutFeedback>
             <Button mode="outlined" onPress={handleLogout} style={styles(theme).logoutButton}>
                 Déconnexion
             </Button>
@@ -126,7 +129,7 @@ const styles = (theme) => StyleSheet.create({
     },
     logoutButton: {
         position: "absolute",
-        bottom: 16, // Espacement en bas
+        bottom: 20, // Espacement en bas
         left: 40, // Espacement à gauche
         right: 40, // Espacement à droite
     }
