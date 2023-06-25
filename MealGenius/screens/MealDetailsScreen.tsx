@@ -11,6 +11,8 @@ import { Ingredient } from "../models/Ingredient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRoute } from "@react-navigation/native";
 import { DarkThemeContext } from "../App";
+import { useDispatch } from "react-redux";
+import { addFavoriteMeal, removeFavoriteMeal } from "../redux/actions/actionFavoriteMeals";
 
 export default function MealDetailsScreen(): JSX.Element  {
     const route = useRoute();
@@ -19,6 +21,7 @@ export default function MealDetailsScreen(): JSX.Element  {
 
     const [isFavorite, setIsFavorite] = useState(false); // État du plat favori
     const { theme } = useContext(DarkThemeContext);
+    const dispatch = useDispatch(); 
 
     useEffect(() => {
         checkFavoriteStatus(); // Vérifier si le plat est déjà en favori lors du chargement du composant
@@ -55,59 +58,24 @@ export default function MealDetailsScreen(): JSX.Element  {
             console.log("Error retrieving favorites from AsyncStorage: ", error);
         }
     };
-    const addToFavorites = async (plat: Meal) => {
-        try {
-            const favorites = await getFavorites();
-            let updatedFavorites = [];
 
-            if (favorites) {
-                let isAlreadyFavorite = false;
-                // Vérifier si le plat existe déjà dans les favoris
-                favorites.forEach((favorite: Meal) => {
-                    if (favorite.id === plat.id) {
-                        isAlreadyFavorite = true;
-                    }
-                });
-                if (isAlreadyFavorite) {
-                    setIsFavorite(true); // Mettre à jour l'état du plat favori
-                    return;
-                }
-                updatedFavorites = [...favorites, plat];
-            } else {
-                // Aucun favori existant, ajouter le nouveau plat comme le premier favori
-                updatedFavorites = [plat];
-            }
-
-            await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-            setIsFavorite(true); // Mettre à jour l'état du plat favori
-        } catch (error) {
-            console.log("Error adding to favorites in AsyncStorage: ", error);
-        }
+    function addToFavorites(meal: Meal) {
+        setIsFavorite(true);
+        // @ts-ignore
+        dispatch(addFavoriteMeal(meal))
     };
 
-    const removeFromFavorites = async (plat: Meal) => {
-        try {
-            const favorites = await getFavorites();
-            if (favorites) {
-                const updatedFavorites = favorites.filter(
-                    (favorite: Meal) => favorite.id !== plat.id
-                );
-                await AsyncStorage.setItem(
-                    "favorites",
-                    JSON.stringify(updatedFavorites)
-                );
-
-                setIsFavorite(false); // Mettre à jour l'état du plat favori
-            }
-        } catch (error) {
-            console.log("Error removing from favorites in AsyncStorage: ", error);
-        }
+    function removeFromFavorites(meal: Meal) {
+        setIsFavorite(false);
+        // @ts-ignore
+        dispatch(removeFavoriteMeal(meal))
     };
+
     const handleFavoritePress = async () => {
         if (isFavorite) {
-            await removeFromFavorites(meal); // Supprimer le plat des favoris
+            removeFromFavorites(meal); // Supprimer le plat des favoris
         } else {
-            await addToFavorites(meal); // Ajouter le plat aux favoris
+            addToFavorites(meal); // Ajouter le plat aux favoris
         }
     };
 

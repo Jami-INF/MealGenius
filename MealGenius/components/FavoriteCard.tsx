@@ -10,7 +10,6 @@ import { DarkThemeContext } from "../App";
 
 type FavoriteCardProps = {
     meal: Meal,
-    onDelete: (meal: Meal) => void
 }
 
 export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
@@ -19,15 +18,15 @@ export default function FavoriteCard(props: FavoriteCardProps): JSX.Element {
     return (
         <View style={styles(theme).wrapper}>
             <View style={styles(theme).main}>
-                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} onDelete={props.onDelete}/>}>
+                <Swipeable renderRightActions={() => <DeleteComponent meal={props.meal} />}>
                     <Surface style={styles(theme).card} mode={"flat"}>
-                        <Image style={styles(theme).image} source={{uri: props.meal.image}}/>
+                        <Image style={styles(theme).image} source={{ uri: props.meal.image }} />
                         <View style={styles(theme).content}>
                             <Text numberOfLines={1} style={styles(theme).name}>{props.meal.name}</Text>
-                            <Text numberOfLines={2} style={{color: theme.secondaryTextColor}}>{props.meal.description}</Text>
+                            <Text numberOfLines={2} style={{ color: theme.secondaryTextColor }}>{props.meal.description}</Text>
                             <View style={styles(theme).duration}>
-                                <Ionicons name="time-outline" size={20} style={{color: theme.secondaryTextColor}}/>
-                                <Time time={props.meal.duration} fontSize={15}/>
+                                <Ionicons name="time-outline" size={20} style={{ color: theme.secondaryTextColor }} />
+                                <Time time={props.meal.duration} fontSize={15} />
                             </View>
                         </View>
                     </Surface>
@@ -83,7 +82,7 @@ const styles = (theme) => StyleSheet.create({
     },
     wrapper: {
         margin: 5,
-        backgroundColor: 'white',
+        backgroundColor: theme.backgroundColor,
     }
 });
 

@@ -6,7 +6,6 @@ type MealsDay = {
     dessert: Meal,
 }
 export const setMealsDay = (mealsDay: MealsDay) => {
-    console.log(mealsDay);
     return {
         type: FETCH_MEAL_DAY,
         payload: mealsDay,
